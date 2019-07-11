@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,9 @@
 		9D094E7022D3854F00EAA0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D094E6E22D3854F00EAA0E6 /* LaunchScreen.storyboard */; };
 		9D094E7B22D3854F00EAA0E6 /* TheCinemaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D094E7A22D3854F00EAA0E6 /* TheCinemaTests.swift */; };
 		9D094E8622D3854F00EAA0E6 /* TheCinemaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D094E8522D3854F00EAA0E6 /* TheCinemaUITests.swift */; };
+		9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */; };
+		9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */; };
+		9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,9 @@
 		9D094E8122D3854F00EAA0E6 /* TheCinemaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCinemaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D094E8522D3854F00EAA0E6 /* TheCinemaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCinemaUITests.swift; sourceTree = "<group>"; };
 		9D094E8722D3854F00EAA0E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginV.swift; sourceTree = "<group>"; };
+		9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
 		A241D7AFF76B014612F8BDEA /* Pods-TheCinema.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.release.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.release.xcconfig"; sourceTree = "<group>"; };
 		C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheCinemaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4CB19BC72C1D4FB519FE03 /* Pods-TheCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.debug.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 		9D094E6422D3854D00EAA0E6 /* TheCinema */ = {
 			isa = PBXGroup;
 			children = (
+				9D40FE7F22D77C1F00F6C1F8 /* UserConnection */,
 				9D094E6522D3854D00EAA0E6 /* AppDelegate.swift */,
 				9D094E6722D3854D00EAA0E6 /* ViewController.swift */,
 				9D094E6922D3854D00EAA0E6 /* Main.storyboard */,
@@ -152,6 +159,24 @@
 			path = TheCinemaUITests;
 			sourceTree = "<group>";
 		};
+		9D40FE7F22D77C1F00F6C1F8 /* UserConnection */ = {
+			isa = PBXGroup;
+			children = (
+				9D40FE8022D77C3B00F6C1F8 /* Login */,
+			);
+			path = UserConnection;
+			sourceTree = "<group>";
+		};
+		9D40FE8022D77C3B00F6C1F8 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */,
+				9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */,
+				9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		DFB64D046210CAADB013D83E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +187,6 @@
 				50BD29DF44CF591223F357A1 /* Pods-TheCinemaUITests.debug.xcconfig */,
 				1DFD3E84393CC39E8783F7A3 /* Pods-TheCinemaUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -387,8 +411,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */,
 				9D094E6822D3854D00EAA0E6 /* ViewController.swift in Sources */,
+				9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */,
 				9D094E6622D3854D00EAA0E6 /* AppDelegate.swift in Sources */,
+				9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,14 +594,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF58AE9U4V;
 				INFOPLIST_FILE = TheCinema/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -586,14 +614,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF58AE9U4V;
 				INFOPLIST_FILE = TheCinema/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

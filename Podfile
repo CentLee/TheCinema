@@ -7,6 +7,16 @@ target 'TheCinema' do
 
   # Pods for TheCinema
   pod 'Cartography'
+  pod 'RxSwift'
+  pod 'Alamofire'
+  pod 'RxCocoa'
+  pod 'ObjectMapper'
+  pod 'Firebase'
+  pod 'Moya'
+  pod 'Kingfisher'
+  pod 'RxFlow'
+  pod 'RxGesture'
+  pod 'expanding-collection'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing
