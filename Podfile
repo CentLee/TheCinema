@@ -17,6 +17,9 @@ target 'TheCinema' do
   pod 'RxFlow'
   pod 'RxGesture'
   pod 'expanding-collection'
+  pod 'Then'
+  pod 'ReactorKit'
+  pod 'SwiftLint'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing
