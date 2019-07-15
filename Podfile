@@ -12,11 +12,14 @@ target 'TheCinema' do
   pod 'RxCocoa'
   pod 'ObjectMapper'
   pod 'Firebase'
-  pod 'Moya'
   pod 'Kingfisher'
   pod 'RxFlow'
   pod 'RxGesture'
   pod 'expanding-collection'
+  pod 'Then'
+  pod 'ReactorKit'
+  pod 'SwiftLint'
+  pod 'Firebase/Core'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing
