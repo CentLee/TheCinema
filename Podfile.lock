@@ -50,18 +50,14 @@ PODS:
   - GoogleUtilities/UserDefaults (6.2.1):
     - GoogleUtilities/Logger
   - Kingfisher (5.7.0)
-  - Moya (13.0.1):
-    - Moya/Core (= 13.0.1)
-  - Moya/Core (13.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - ObjectMapper (3.5.1)
-  - Result (4.1.0)
+  - ReactorKit (2.0.1):
+    - RxSwift (~> 5.0)
   - RxCocoa (5.0.0):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -74,19 +70,24 @@ PODS:
   - RxRelay (5.0.0):
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
+  - SwiftLint (0.33.0)
+  - Then (2.5.0)
 
 DEPENDENCIES:
   - Alamofire
   - Cartography
   - expanding-collection
   - Firebase
+  - Firebase/Core
   - Kingfisher
-  - Moya
   - ObjectMapper
+  - ReactorKit
   - RxCocoa
   - RxFlow
   - RxGesture
   - RxSwift
+  - SwiftLint
+  - Then
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -100,15 +101,16 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - Kingfisher
-    - Moya
     - nanopb
     - ObjectMapper
-    - Result
+    - ReactorKit
     - RxCocoa
     - RxFlow
     - RxGesture
     - RxRelay
     - RxSwift
+    - SwiftLint
+    - Then
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -121,16 +123,17 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: a35a645835bae31b6bdc0576396bc23908f12a22
   GoogleUtilities: c7a0b08bda3bf808be823ed151f0e28ac6866e71
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
-  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  ReactorKit: a63c5e11e0fd32d59d672e54178b0ed2876b764b
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxFlow: ee6f1fdbacfa4ca8926122e466dfba32e3edf73f
   RxGesture: 0cd8e37ff9a266e1c31f46bcaed6de1c536bc81e
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
+  Then: 0157115e883545c77967b452fe74a1d25fb796e1
 
-PODFILE CHECKSUM: 0518abcd2230d2e5ee4fed7464985b101f2027d6
+PODFILE CHECKSUM: 54ff56df6ea6db141cb68dab80c807ed3dd20d16
 
 COCOAPODS: 1.7.3

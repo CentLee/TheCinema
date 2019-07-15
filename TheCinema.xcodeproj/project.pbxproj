@@ -20,6 +20,7 @@
 		9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */; };
 		9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */; };
 		9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */; };
+		9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginV.swift; sourceTree = "<group>"; };
 		9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A241D7AFF76B014612F8BDEA /* Pods-TheCinema.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.release.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.release.xcconfig"; sourceTree = "<group>"; };
 		C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheCinemaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4CB19BC72C1D4FB519FE03 /* Pods-TheCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.debug.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				9D094E6C22D3854F00EAA0E6 /* Assets.xcassets */,
 				9D094E6E22D3854F00EAA0E6 /* LaunchScreen.storyboard */,
 				9D094E7122D3854F00EAA0E6 /* Info.plist */,
+				9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */,
 			);
 			path = TheCinema;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D094E7022D3854F00EAA0E6 /* LaunchScreen.storyboard in Resources */,
+				9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */,
 				9D094E6D22D3854F00EAA0E6 /* Assets.xcassets in Resources */,
 				9D094E6B22D3854D00EAA0E6 /* Main.storyboard in Resources */,
 			);
