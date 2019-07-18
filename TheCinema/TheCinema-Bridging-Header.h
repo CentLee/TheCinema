@@ -2,22 +2,22 @@
 //  TheCinema-Bridging-Header.h
 //  TheCinema
 //
-//  Created by SatGatLee on 11/07/2019.
+//  Created by SatGatLee on 15/07/2019.
 //  Copyright © 2019 com.example. All rights reserved.
 //
 
 #ifndef TheCinema_Bridging_Header_h
 #define TheCinema_Bridging_Header_h
 
-
-@import Cartography;
+@import Firebase;
+@import Then;
 @import RxSwift;
 @import RxCocoa;
-@import Firebase;
 @import Alamofire;
+@import Cartography;
 @import ObjectMapper;
-@import Then;
-@import ReactorKit;
-@import UIKit;
+@import Kingfisher;
+@import Firebase/Firestoree;
+@import XCoordinator;
 
 #endif /* TheCinema_Bridging_Header_h */

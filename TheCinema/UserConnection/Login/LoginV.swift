@@ -16,9 +16,10 @@ class LoginV: UIView { //로그인 뷰.
   }
   lazy var loginVTitle: UILabel = UILabel().then {
     $0.text = "The Cinema"
+    $0.font = UIFont(name: "NanumSquareEB", size:20)
   }
   lazy var loginVSubTitle: UILabel = UILabel().then {
-    $0.text = "상영작부터 간단하게 사용 가능한 영화 앱"
+    $0.text = "상영작부터 간단하게 사용 가능한 영화 정보 앱"
   }
   lazy var kakaoLoginBtn: UIButton = UIButton().then {
     _ in
@@ -28,6 +29,13 @@ class LoginV: UIView { //로그인 뷰.
   override init(frame: CGRect) {
     super.init(frame: .zero)
     
+    [loginVTitle].forEach {
+      self.addSubview($0)
+    }
+    
+    constrain(loginVTitle, self) {
+      $0.center == $1.center
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
