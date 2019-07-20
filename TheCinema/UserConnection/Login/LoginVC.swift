@@ -21,6 +21,10 @@ class LoginVC: UIViewController {
         $0.height == 200
         $0.center == $1.center
       }
+      
+      for font in UIFont.familyNames {
+        print(font)
+      }
         // Do any additional setup after loading the view.
     }
 }

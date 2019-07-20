@@ -8,7 +8,7 @@
 
 #ifndef TheCinema_Bridging_Header_h
 #define TheCinema_Bridging_Header_h
-
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 @import Firebase;
 @import Then;
 @import RxSwift;

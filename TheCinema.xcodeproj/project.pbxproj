@@ -23,6 +23,7 @@
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
 		9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */; };
+		9DF9E75822E32D0F00823BEA /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF9E75722E32D0F00823BEA /* KakaoOpenSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9DF9E75722E32D0F00823BEA /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		A241D7AFF76B014612F8BDEA /* Pods-TheCinema.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.release.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.release.xcconfig"; sourceTree = "<group>"; };
 		C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheCinemaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4CB19BC72C1D4FB519FE03 /* Pods-TheCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.debug.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.debug.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98010C18D491B41B77725585 /* Pods_TheCinema.framework in Frameworks */,
+				9DF9E75822E32D0F00823BEA /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 		14BFDC2A7C52C56DD60710A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9DF9E75722E32D0F00823BEA /* KakaoOpenSDK.framework */,
 				17DAA67BA7AB79FA5D2E7161 /* Pods_TheCinema.framework */,
 				7A76D2FE6602AB895FEED8B9 /* Pods_TheCinemaTests.framework */,
 				C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */,
@@ -605,11 +609,91 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF58AE9U4V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TheCinema/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Cartography\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"ReactorKit\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxGesture\"",
+					"-framework",
+					"\"RxRelay\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"Then\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"XCoordinator\"",
+					"-framework",
+					"\"expanding_collection\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -626,11 +710,91 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NF58AE9U4V;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TheCinema/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"c++\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Alamofire\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Cartography\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseFirestore\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"Kingfisher\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"ObjectMapper\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"ReactorKit\"",
+					"-framework",
+					"\"RxCocoa\"",
+					"-framework",
+					"\"RxGesture\"",
+					"-framework",
+					"\"RxRelay\"",
+					"-framework",
+					"\"RxSwift\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"Then\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"XCoordinator\"",
+					"-framework",
+					"\"expanding_collection\"",
+					"-framework",
+					"\"grpc\"",
+					"-framework",
+					"\"grpcpp\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-framework",
+					"\"openssl_grpc\"",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";

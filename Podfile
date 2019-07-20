@@ -20,6 +20,7 @@ target 'TheCinema' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'XCoordinator', '~> 1.0'
+  pod 'naveridlogin-sdk-ios'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing
