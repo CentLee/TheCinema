@@ -93,6 +93,8 @@ iOSInjectionProject/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
+!*.xcodeproj/xcuserdata
+!*.xcodeproj/xcworkspace/xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 

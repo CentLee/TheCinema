@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       view.addSubview(loginV)
+      view.backgroundColor = .white
       constrain(loginV, view) {
         $0.width  == 200
         $0.height == 200

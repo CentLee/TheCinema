@@ -34,10 +34,10 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NanumSquareBold.ttf</string>
-		<string>NanumSquareExtraBold.ttf</string>
-		<string>NanumSquareLight.ttf</string>
-		<string>NanumSquareRegular.ttf</string>
+		<string>NanumSquareOTFBold.otf</string>
+		<string>NanumSquareOTFExtraBold.otf</string>
+		<string>NanumSquareOTFLight.otf</string>
+		<string>NanumSquareOTFRegular.otf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

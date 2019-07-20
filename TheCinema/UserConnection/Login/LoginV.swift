@@ -16,7 +16,7 @@ class LoginV: UIView { //로그인 뷰.
   }
   lazy var loginVTitle: UILabel = UILabel().then {
     $0.text = "The Cinema"
-    $0.font = UIFont(name: "NanumSquareEB", size:20)
+    $0.font = UIFont(name: "NanumSquareOTFEB", size:40)
   }
   lazy var loginVSubTitle: UILabel = UILabel().then {
     $0.text = "상영작부터 간단하게 사용 가능한 영화 정보 앱"
@@ -24,7 +24,7 @@ class LoginV: UIView { //로그인 뷰.
   lazy var kakaoLoginBtn: UIButton = UIButton().then {
     _ in
   }
-  //lazy var 
+  //lazy var dwqpodkqwdpqwkdoqwkodqkowkp
   ///
   override init(frame: CGRect) {
     super.init(frame: .zero)

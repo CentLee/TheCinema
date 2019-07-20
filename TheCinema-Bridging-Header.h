@@ -17,7 +17,7 @@
 @import Cartography;
 @import ObjectMapper;
 @import Kingfisher;
-@import Firebase/Firestoree;
+//@import Firebase/Firestore;
 @import XCoordinator;
 
 #endif /* TheCinema_Bridging_Header_h */

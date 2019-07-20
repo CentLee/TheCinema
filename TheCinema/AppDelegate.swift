@@ -17,11 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    guard let window = window else { return false }
-    FirebaseApp.configure()
-    
-    //window?.makeKeyAndVisible()
+    //guard let window = window else { return false }
     let loginVC = LoginVC()
+    window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    guard let window = window else { return false }
+    window.rootViewController = loginVC
+    window.makeKeyAndVisible()
+    FirebaseApp.configure()
+  
     //window?.rootViewController = loginVC
     return true
   }
