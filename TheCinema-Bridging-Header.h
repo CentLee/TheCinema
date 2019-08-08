@@ -15,9 +15,8 @@
 @import RxCocoa;
 @import Alamofire;
 @import Cartography;
-@import ObjectMapper;
 @import Kingfisher;
-//@import Firebase/Firestore;
+@import FirebaseAuth;
 @import XCoordinator;
-
+@import FirebaseDatabase;
 #endif /* TheCinema_Bridging_Header_h */
