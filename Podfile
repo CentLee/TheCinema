@@ -18,8 +18,11 @@ target 'TheCinema' do
   pod 'Then'
   pod 'SwiftLint'
   pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   pod 'XCoordinator', '~> 1.0'
+  pod 'naveridlogin-sdk-ios'
+  pod 'GoogleSignIn'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing

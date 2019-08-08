@@ -2,7 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "buttonsLoginGoogle.pdf"
+      "filename" : "btn_google_signin_light_normal_web.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "btn_google_signin_light_normal_web@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "btn_google_signin_light_normal_web@2x-1.png",
+      "scale" : "3x"
     }
   ],
   "info" : {
