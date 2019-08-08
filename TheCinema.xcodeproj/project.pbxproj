@@ -11,7 +11,6 @@
 		301DA9579351D561E4BED48C /* Pods_TheCinemaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */; };
 		98010C18D491B41B77725585 /* Pods_TheCinema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17DAA67BA7AB79FA5D2E7161 /* Pods_TheCinema.framework */; };
 		9D094E6622D3854D00EAA0E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D094E6522D3854D00EAA0E6 /* AppDelegate.swift */; };
-		9D094E6822D3854D00EAA0E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D094E6722D3854D00EAA0E6 /* ViewController.swift */; };
 		9D094E6B22D3854D00EAA0E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D094E6922D3854D00EAA0E6 /* Main.storyboard */; };
 		9D094E6D22D3854F00EAA0E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D094E6C22D3854F00EAA0E6 /* Assets.xcassets */; };
 		9D094E7022D3854F00EAA0E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D094E6E22D3854F00EAA0E6 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,13 @@
 		9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */; };
 		9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */; };
 		9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */; };
+		9DE73FDD22F5A2E700AB2F9D /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE73FDC22F5A2E700AB2F9D /* UserInformation.swift */; };
+		9DE796CF22F9B92D00FF7DC7 /* MainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796CE22F9B92D00FF7DC7 /* MainManager.swift */; };
+		9DE796D222F9C42E00FF7DC7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D122F9C42E00FF7DC7 /* SignUpVC.swift */; };
+		9DE796D422F9C4F600FF7DC7 /* SignUpV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D322F9C4F600FF7DC7 /* SignUpV.swift */; };
+		9DE796D622F9CD1F00FF7DC7 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D522F9CD1F00FF7DC7 /* SignUpVM.swift */; };
+		9DE796D922FC5BD800FF7DC7 /* UiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */; };
+		9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE96B4822E491FF00997C14 /* gConstants.swift */; };
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
 		9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */; };
@@ -52,7 +58,6 @@
 		7A76D2FE6602AB895FEED8B9 /* Pods_TheCinemaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheCinemaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D094E6222D3854D00EAA0E6 /* TheCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D094E6522D3854D00EAA0E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9D094E6722D3854D00EAA0E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9D094E6A22D3854D00EAA0E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9D094E6C22D3854F00EAA0E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D094E6F22D3854F00EAA0E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,6 +71,13 @@
 		9D40FE8122D77C5600F6C1F8 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9D40FE8322D77C7E00F6C1F8 /* LoginV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginV.swift; sourceTree = "<group>"; };
 		9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVM.swift; sourceTree = "<group>"; };
+		9DE73FDC22F5A2E700AB2F9D /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
+		9DE796CE22F9B92D00FF7DC7 /* MainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainManager.swift; sourceTree = "<group>"; };
+		9DE796D122F9C42E00FF7DC7 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		9DE796D322F9C4F600FF7DC7 /* SignUpV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpV.swift; sourceTree = "<group>"; };
+		9DE796D522F9CD1F00FF7DC7 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
+		9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiExtension.swift; sourceTree = "<group>"; };
+		9DE96B4822E491FF00997C14 /* gConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gConstants.swift; sourceTree = "<group>"; };
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -141,15 +153,17 @@
 		9D094E6422D3854D00EAA0E6 /* TheCinema */ = {
 			isa = PBXGroup;
 			children = (
+				9DE796D722FC5BC300FF7DC7 /* Supporting Files */,
 				9D40FE7F22D77C1F00F6C1F8 /* UserConnection */,
 				9D094E6522D3854D00EAA0E6 /* AppDelegate.swift */,
-				9D094E6722D3854D00EAA0E6 /* ViewController.swift */,
 				9D094E6922D3854D00EAA0E6 /* Main.storyboard */,
 				9D094E6C22D3854F00EAA0E6 /* Assets.xcassets */,
 				9D094E6E22D3854F00EAA0E6 /* LaunchScreen.storyboard */,
 				9D094E7122D3854F00EAA0E6 /* Info.plist */,
 				9DEA95BB22E0BB3700D936F6 /* Fonts */,
 				9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */,
+				9DE96B4822E491FF00997C14 /* gConstants.swift */,
+				9DE796CE22F9B92D00FF7DC7 /* MainManager.swift */,
 			);
 			path = TheCinema;
 			sourceTree = "<group>";
@@ -175,6 +189,8 @@
 		9D40FE7F22D77C1F00F6C1F8 /* UserConnection */ = {
 			isa = PBXGroup;
 			children = (
+				9DE796D022F9C40E00FF7DC7 /* SignUp */,
+				9DE96B4722E487A000997C14 /* AppModel */,
 				9D40FE8022D77C3B00F6C1F8 /* Login */,
 			);
 			path = UserConnection;
@@ -188,6 +204,32 @@
 				9D40FE8522D77C8900F6C1F8 /* LoginVM.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		9DE796D022F9C40E00FF7DC7 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796D122F9C42E00FF7DC7 /* SignUpVC.swift */,
+				9DE796D322F9C4F600FF7DC7 /* SignUpV.swift */,
+				9DE796D522F9CD1F00FF7DC7 /* SignUpVM.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		9DE796D722FC5BC300FF7DC7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DE96B4722E487A000997C14 /* AppModel */ = {
+			isa = PBXGroup;
+			children = (
+				9DE73FDC22F5A2E700AB2F9D /* UserInformation.swift */,
+			);
+			path = AppModel;
 			sourceTree = "<group>";
 		};
 		DFB64D046210CAADB013D83E /* Pods */ = {
@@ -215,6 +257,7 @@
 				9D094E5F22D3854D00EAA0E6 /* Frameworks */,
 				9D094E6022D3854D00EAA0E6 /* Resources */,
 				9568D478E8ED9382B0DBBFE0 /* [CP] Embed Pods Frameworks */,
+				44B32453962F8318801F3FA5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -359,6 +402,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		44B32453962F8318801F3FA5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheCinema/Pods-TheCinema-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheCinema/Pods-TheCinema-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheCinema/Pods-TheCinema-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		71DB8E4044AD785D88805221 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,11 +487,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DE796D222F9C42E00FF7DC7 /* SignUpVC.swift in Sources */,
 				9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */,
-				9D094E6822D3854D00EAA0E6 /* ViewController.swift in Sources */,
+				9DE73FDD22F5A2E700AB2F9D /* UserInformation.swift in Sources */,
+				9DE796CF22F9B92D00FF7DC7 /* MainManager.swift in Sources */,
 				9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */,
 				9D094E6622D3854D00EAA0E6 /* AppDelegate.swift in Sources */,
+				9DE796D922FC5BD800FF7DC7 /* UiExtension.swift in Sources */,
 				9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */,
+				9DE796D422F9C4F600FF7DC7 /* SignUpV.swift in Sources */,
+				9DE796D622F9CD1F00FF7DC7 /* SignUpVM.swift in Sources */,
+				9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,8 +708,6 @@
 					"-framework",
 					"\"FirebaseCoreDiagnostics\"",
 					"-framework",
-					"\"FirebaseFirestore\"",
-					"-framework",
 					"\"FirebaseInstanceID\"",
 					"-framework",
 					"\"Foundation\"",
@@ -657,10 +721,6 @@
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"ObjectMapper\"",
-					"-framework",
-					"\"Protobuf\"",
-					"-framework",
-					"\"ReactorKit\"",
 					"-framework",
 					"\"RxCocoa\"",
 					"-framework",
@@ -684,21 +744,15 @@
 					"-framework",
 					"\"expanding_collection\"",
 					"-framework",
-					"\"grpc\"",
-					"-framework",
-					"\"grpcpp\"",
-					"-framework",
 					"\"leveldb\"",
 					"-framework",
 					"\"nanopb\"",
-					"-framework",
-					"\"openssl_grpc\"",
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheCinema-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -743,8 +797,6 @@
 					"-framework",
 					"\"FirebaseCoreDiagnostics\"",
 					"-framework",
-					"\"FirebaseFirestore\"",
-					"-framework",
 					"\"FirebaseInstanceID\"",
 					"-framework",
 					"\"Foundation\"",
@@ -758,10 +810,6 @@
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"ObjectMapper\"",
-					"-framework",
-					"\"Protobuf\"",
-					"-framework",
-					"\"ReactorKit\"",
 					"-framework",
 					"\"RxCocoa\"",
 					"-framework",
@@ -785,21 +833,15 @@
 					"-framework",
 					"\"expanding_collection\"",
 					"-framework",
-					"\"grpc\"",
-					"-framework",
-					"\"grpcpp\"",
-					"-framework",
 					"\"leveldb\"",
 					"-framework",
 					"\"nanopb\"",
-					"-framework",
-					"\"openssl_grpc\"",
 					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheCinema-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
