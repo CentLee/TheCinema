@@ -20,9 +20,10 @@ target 'TheCinema' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'XCoordinator', '~> 1.0'
-  pod 'naveridlogin-sdk-ios'
   pod 'GoogleSignIn'
+  pod 'NotificationBannerSwift'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing

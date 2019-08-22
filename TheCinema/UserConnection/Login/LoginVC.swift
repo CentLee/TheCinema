@@ -45,16 +45,30 @@ extension LoginVC {
   }
   
   private func setupBind() {
-    loginV.googleLoginBtn.rx.tap
-      .asDriver()
+    loginV.emailText.rx.text.filter{$0 != ""}.asDriver(onErrorJustReturn: "").drive(loginVM.emailText).disposed(by: disposeBag)
+    loginV.passwordText.rx.text.filter{$0 != ""}.asDriver(onErrorJustReturn: "").drive(loginVM.passwordText).disposed(by: disposeBag)
+    
+    loginV.googleLoginBtn.rx.tap.asDriver()
       .drive(onNext: {
         GIDSignIn.sharedInstance()?.signIn()
       })
       .disposed(by: disposeBag)
     
+    Driver.combineLatest(loginV.emailText.rx.text.map{$0 != ""}.asDriver(onErrorJustReturn: false), loginV.passwordText.rx.text.map{$0 != ""}.asDriver(onErrorJustReturn: false)) { (isEmailValid, isPasswordValid) in
+      return isEmailValid && isPasswordValid
+      }
+      .drive(onNext: { [weak self] (isValid) in
+        self?.loginV.loginBtn.isEnabled = isValid
+      }).disposed(by: disposeBag)
+    
+    loginV.loginBtn.rx.tap.asDriver()
+    .drive(loginVM.onLoginTapped).disposed(by: disposeBag)
+    
     loginVM.onLogined.asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in
         self?.btnIsEnabled(flag: true)
+        //main flow move
+        self?.tabBarSetUp()
       }).disposed(by: disposeBag)
     
     loginV.signUpBtn.rx.tap
@@ -63,6 +77,16 @@ extension LoginVC {
         let vc: SignUpVC = SignUpVC()
         self?.present(vc, animated: true, completion: nil)
       }).disposed(by: disposeBag)
+  }
+  
+  private func tabBarSetUp() { //탭바 이니셜
+    let firstVC = BoxOfficeVC()
+    firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
+    let secondVC = MovieSearchVC()
+    secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+    let tabbar: UITabBarController = UITabBarController()
+    tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), secondVC]
+    present(tabbar, animated: true, completion: nil)
   }
 }
 
