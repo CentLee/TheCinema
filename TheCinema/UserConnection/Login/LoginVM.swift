@@ -15,8 +15,9 @@ enum LoginType {
   case email
 }
 protocol LoginViewModelInterface {
-  
-  var onLoginTapped: BehaviorRelay<LoginType?> {get set}
+  var emailText: BehaviorRelay<String?> {get set}
+  var passwordText: BehaviorRelay<String?> {get set}
+  var onLoginTapped: BehaviorRelay<Void> {get set}
   var onGoogleLogined: PublishSubject<(String, String, AuthCredential)> {get set}
   
   var onLogined: PublishSubject<Void> {get}
@@ -24,7 +25,9 @@ protocol LoginViewModelInterface {
 }
 class LoginVM: NSObject, LoginViewModelInterface { //이메일 로그인과 구글 로그인 연동.
   //Input
-  var onLoginTapped: BehaviorRelay<LoginType?> = BehaviorRelay<LoginType?>(value: nil)
+  var emailText: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
+  var passwordText: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
+  var onLoginTapped: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
   var onGoogleLogined: PublishSubject<(String, String, AuthCredential)> = PublishSubject<(String, String, AuthCredential)>()
   
   //output
@@ -37,18 +40,16 @@ class LoginVM: NSObject, LoginViewModelInterface { //이메일 로그인과 구�
   
   override init() {
     super.init()
-    GIDSignIn.sharedInstance().uiDelegate = self
-    GIDSignIn.sharedInstance().delegate = self
     self.setupBind()
   }
 }
 extension LoginVM {
   private func setupBind() {
     ref = Database.database().reference()
+    
     onLoginTapped
-      .subscribe(onNext: { [weak self] type in
-        guard let type = type , let self = self else { return }
-        self.loginGroupByType(type: type)
+      .subscribe(onNext: { [weak self] in
+        self?.loginFirebase()
       }).disposed(by: disposeBag)
     
     onGoogleLogined.subscribe(onNext: {[weak self] (name, image, credential) in
@@ -58,39 +59,31 @@ extension LoginVM {
     }).disposed(by: disposeBag)
     
   }
-  private func loginGroupByType(type: LoginType) {
-    if type == .google {
-      GIDSignIn.sharedInstance()?.signIn()
+  
+  private func loginFirebase() {
+    guard let email: String = emailText.value , let password: String = passwordText.value else { return }
+    Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+      guard error == nil else { return }
+      self.onLogined.onNext(())
     }
   }
   
   private func firebaseAuthentication(credential: AuthCredential) {
     Auth.auth().signIn(with: credential) { [weak self] (result, error) in
       guard let self = self , let user = result?.user else { return }
-      
       MainManager.SI.userInfo.userId = user.uid
       MainManager.SI.userInfo.userName = self.userName
       MainManager.SI.userInfo.userProfileImage = self.userProfileImage
       self.ref.child("User").observeSingleEvent(of: .value, with: { (snapshot) in
         guard snapshot.hasChild("\(user.uid)") else  {
           self.ref.child("User").child("\(user.uid)").setValue(["UserInformation" : ["user_id": user.uid, "user_name": self.userName, "user_profile_img": self.userProfileImage]])
+          self.onLogined.onNext(())
           //데이터 저장 후 푸쉬
           return
         }
+        self.onLogined.onNext(())
       })
       
     }
-  }
-}
-
-extension LoginVM: GIDSignInDelegate, GIDSignInUIDelegate {
-  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) { //로그인 되면 정보 가지고 파이어베이스 저장ㄴ
-    guard let authentication = user.authentication else { return }
-    let creadential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-    userName = user.profile.name
-    if user.profile.hasImage {
-      userProfileImage = user.profile.imageURL(withDimension: 100)?.absoluteString
-    }
-    firebaseAuthentication(credential: creadential)
   }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 var screenWidth: CGFloat = UIScreen.main.bounds.width
 var screenHeight: CGFloat = UIScreen.main.bounds.height
+
 public func iPrint(_ objects:Any... , filename:String = #file,_ line:Int = #line, _ funcname:String = #function){ //debuging Print
   #if DEBUG
   let dateFormatter = DateFormatter()

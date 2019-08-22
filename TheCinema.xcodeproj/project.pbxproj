@@ -25,6 +25,13 @@
 		9DE796D422F9C4F600FF7DC7 /* SignUpV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D322F9C4F600FF7DC7 /* SignUpV.swift */; };
 		9DE796D622F9CD1F00FF7DC7 /* SignUpVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D522F9CD1F00FF7DC7 /* SignUpVM.swift */; };
 		9DE796D922FC5BD800FF7DC7 /* UiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */; };
+		9DE796DC22FEDC9B00FF7DC7 /* BoxOfficeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796DB22FEDC9B00FF7DC7 /* BoxOfficeVC.swift */; };
+		9DE796DE230C30A700FF7DC7 /* BoxOfficeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796DD230C30A700FF7DC7 /* BoxOfficeVM.swift */; };
+		9DE796E2230D794400FF7DC7 /* MovieSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E1230D794400FF7DC7 /* MovieSearchVC.swift */; };
+		9DE796E4230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E3230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift */; };
+		9DE796E6230D7C4B00FF7DC7 /* MovieSearchV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */; };
+		9DE796E8230ED4C800FF7DC7 /* MovieGenreSearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */; };
+		9DE796EB230EDC2C00FF7DC7 /* MovieGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796EA230EDC2C00FF7DC7 /* MovieGenreVC.swift */; };
 		9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE96B4822E491FF00997C14 /* gConstants.swift */; };
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
@@ -77,6 +84,13 @@
 		9DE796D322F9C4F600FF7DC7 /* SignUpV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpV.swift; sourceTree = "<group>"; };
 		9DE796D522F9CD1F00FF7DC7 /* SignUpVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVM.swift; sourceTree = "<group>"; };
 		9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiExtension.swift; sourceTree = "<group>"; };
+		9DE796DB22FEDC9B00FF7DC7 /* BoxOfficeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeVC.swift; sourceTree = "<group>"; };
+		9DE796DD230C30A700FF7DC7 /* BoxOfficeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeVM.swift; sourceTree = "<group>"; };
+		9DE796E1230D794400FF7DC7 /* MovieSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchVC.swift; sourceTree = "<group>"; };
+		9DE796E3230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreCollectionViewCell.swift; sourceTree = "<group>"; };
+		9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchV.swift; sourceTree = "<group>"; };
+		9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreSearchVM.swift; sourceTree = "<group>"; };
+		9DE796EA230EDC2C00FF7DC7 /* MovieGenreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreVC.swift; sourceTree = "<group>"; };
 		9DE96B4822E491FF00997C14 /* gConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gConstants.swift; sourceTree = "<group>"; };
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
@@ -153,7 +167,9 @@
 		9D094E6422D3854D00EAA0E6 /* TheCinema */ = {
 			isa = PBXGroup;
 			children = (
+				9DE796DF230D790900FF7DC7 /* MovieSearch */,
 				9DE796D722FC5BC300FF7DC7 /* Supporting Files */,
+				9DE796DA22FEDC8500FF7DC7 /* BoxOffice */,
 				9D40FE7F22D77C1F00F6C1F8 /* UserConnection */,
 				9D094E6522D3854D00EAA0E6 /* AppDelegate.swift */,
 				9D094E6922D3854D00EAA0E6 /* Main.storyboard */,
@@ -222,6 +238,51 @@
 				9DE796D822FC5BD800FF7DC7 /* UiExtension.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9DE796DA22FEDC8500FF7DC7 /* BoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796DB22FEDC9B00FF7DC7 /* BoxOfficeVC.swift */,
+				9DE796DD230C30A700FF7DC7 /* BoxOfficeVM.swift */,
+			);
+			path = BoxOffice;
+			sourceTree = "<group>";
+		};
+		9DE796DF230D790900FF7DC7 /* MovieSearch */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796ED230EDC3E00FF7DC7 /* MovieSearchVM */,
+				9DE796EC230EDC3100FF7DC7 /* MovieSearchV */,
+				9DE796E9230EDC0B00FF7DC7 /* MovieSearchVC */,
+			);
+			path = MovieSearch;
+			sourceTree = "<group>";
+		};
+		9DE796E9230EDC0B00FF7DC7 /* MovieSearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796E1230D794400FF7DC7 /* MovieSearchVC.swift */,
+				9DE796EA230EDC2C00FF7DC7 /* MovieGenreVC.swift */,
+			);
+			path = MovieSearchVC;
+			sourceTree = "<group>";
+		};
+		9DE796EC230EDC3100FF7DC7 /* MovieSearchV */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796E3230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift */,
+				9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */,
+			);
+			path = MovieSearchV;
+			sourceTree = "<group>";
+		};
+		9DE796ED230EDC3E00FF7DC7 /* MovieSearchVM */ = {
+			isa = PBXGroup;
+			children = (
+				9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */,
+			);
+			path = MovieSearchVM;
 			sourceTree = "<group>";
 		};
 		9DE96B4722E487A000997C14 /* AppModel */ = {
@@ -492,11 +553,18 @@
 				9DE73FDD22F5A2E700AB2F9D /* UserInformation.swift in Sources */,
 				9DE796CF22F9B92D00FF7DC7 /* MainManager.swift in Sources */,
 				9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */,
+				9DE796E2230D794400FF7DC7 /* MovieSearchVC.swift in Sources */,
+				9DE796E4230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift in Sources */,
 				9D094E6622D3854D00EAA0E6 /* AppDelegate.swift in Sources */,
+				9DE796E8230ED4C800FF7DC7 /* MovieGenreSearchVM.swift in Sources */,
 				9DE796D922FC5BD800FF7DC7 /* UiExtension.swift in Sources */,
+				9DE796E6230D7C4B00FF7DC7 /* MovieSearchV.swift in Sources */,
 				9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */,
 				9DE796D422F9C4F600FF7DC7 /* SignUpV.swift in Sources */,
 				9DE796D622F9CD1F00FF7DC7 /* SignUpVM.swift in Sources */,
+				9DE796DC22FEDC9B00FF7DC7 /* BoxOfficeVC.swift in Sources */,
+				9DE796EB230EDC2C00FF7DC7 /* MovieGenreVC.swift in Sources */,
+				9DE796DE230C30A700FF7DC7 /* BoxOfficeVM.swift in Sources */,
 				9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
