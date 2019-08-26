@@ -17,11 +17,16 @@ class LoginVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     btnIsEnabled(flag: true)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
     guard Auth.auth().currentUser == nil else {
       //로그인 성공.
+      tabBarSetUp()
       return
     }
   }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubview(loginV)
@@ -85,7 +90,7 @@ extension LoginVC {
     let secondVC = MovieSearchVC()
     secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
     let tabbar: UITabBarController = UITabBarController()
-    tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), secondVC]
+    tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), UINavigationController(rootViewController: secondVC)]
     present(tabbar, animated: true, completion: nil)
   }
 }

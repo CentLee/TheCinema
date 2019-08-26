@@ -44,7 +44,6 @@ class MovieSerachV: UIView {
     super.init(frame: .zero)
     
     layoutSetUp()
-    //searchIcn.tintColor = UIColor.lightGray.withAlphaComponent(0.8)
   }
   required init?(coder aDecoder: NSCoder) {
     fatalError("init() error")

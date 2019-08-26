@@ -14,16 +14,15 @@ target 'TheCinema' do
   pod 'Firebase'
   pod 'Kingfisher'
   pod 'RxGesture'
-  pod 'expanding-collection'
   pod 'Then'
   pod 'SwiftLint'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-  pod 'XCoordinator', '~> 1.0'
   pod 'GoogleSignIn'
   pod 'NotificationBannerSwift'
+  pod 'FSPagerView'
   target 'TheCinemaTests' do
     inherit! :search_paths
     # Pods for testing

@@ -32,6 +32,9 @@
 		9DE796E6230D7C4B00FF7DC7 /* MovieSearchV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */; };
 		9DE796E8230ED4C800FF7DC7 /* MovieGenreSearchVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */; };
 		9DE796EB230EDC2C00FF7DC7 /* MovieGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796EA230EDC2C00FF7DC7 /* MovieGenreVC.swift */; };
+		9DE796EF23113B8900FF7DC7 /* MovieGenrePagerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796EE23113B8900FF7DC7 /* MovieGenrePagerCell.swift */; };
+		9DE796F12312A64000FF7DC7 /* MovieGenreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796F02312A64000FF7DC7 /* MovieGenreData.swift */; };
+		9DE796F52312AD7600FF7DC7 /* MovieGenreNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE796F42312AD7600FF7DC7 /* MovieGenreNetwork.swift */; };
 		9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE96B4822E491FF00997C14 /* gConstants.swift */; };
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
@@ -91,6 +94,9 @@
 		9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchV.swift; sourceTree = "<group>"; };
 		9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreSearchVM.swift; sourceTree = "<group>"; };
 		9DE796EA230EDC2C00FF7DC7 /* MovieGenreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreVC.swift; sourceTree = "<group>"; };
+		9DE796EE23113B8900FF7DC7 /* MovieGenrePagerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenrePagerCell.swift; sourceTree = "<group>"; };
+		9DE796F02312A64000FF7DC7 /* MovieGenreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreData.swift; sourceTree = "<group>"; };
+		9DE796F42312AD7600FF7DC7 /* MovieGenreNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreNetwork.swift; sourceTree = "<group>"; };
 		9DE96B4822E491FF00997C14 /* gConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gConstants.swift; sourceTree = "<group>"; };
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
@@ -179,7 +185,6 @@
 				9DEA95BB22E0BB3700D936F6 /* Fonts */,
 				9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */,
 				9DE96B4822E491FF00997C14 /* gConstants.swift */,
-				9DE796CE22F9B92D00FF7DC7 /* MainManager.swift */,
 			);
 			path = TheCinema;
 			sourceTree = "<group>";
@@ -273,6 +278,7 @@
 			children = (
 				9DE796E3230D79A200FF7DC7 /* MovieGenreCollectionViewCell.swift */,
 				9DE796E5230D7C4B00FF7DC7 /* MovieSearchV.swift */,
+				9DE796EE23113B8900FF7DC7 /* MovieGenrePagerCell.swift */,
 			);
 			path = MovieSearchV;
 			sourceTree = "<group>";
@@ -281,6 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				9DE796E7230ED4C800FF7DC7 /* MovieGenreSearchVM.swift */,
+				9DE796F02312A64000FF7DC7 /* MovieGenreData.swift */,
+				9DE796F42312AD7600FF7DC7 /* MovieGenreNetwork.swift */,
 			);
 			path = MovieSearchVM;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 		9DE96B4722E487A000997C14 /* AppModel */ = {
 			isa = PBXGroup;
 			children = (
+				9DE796CE22F9B92D00FF7DC7 /* MainManager.swift */,
 				9DE73FDC22F5A2E700AB2F9D /* UserInformation.swift */,
 			);
 			path = AppModel;
@@ -550,6 +559,7 @@
 			files = (
 				9DE796D222F9C42E00FF7DC7 /* SignUpVC.swift in Sources */,
 				9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */,
+				9DE796F52312AD7600FF7DC7 /* MovieGenreNetwork.swift in Sources */,
 				9DE73FDD22F5A2E700AB2F9D /* UserInformation.swift in Sources */,
 				9DE796CF22F9B92D00FF7DC7 /* MainManager.swift in Sources */,
 				9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */,
@@ -558,7 +568,9 @@
 				9D094E6622D3854D00EAA0E6 /* AppDelegate.swift in Sources */,
 				9DE796E8230ED4C800FF7DC7 /* MovieGenreSearchVM.swift in Sources */,
 				9DE796D922FC5BD800FF7DC7 /* UiExtension.swift in Sources */,
+				9DE796F12312A64000FF7DC7 /* MovieGenreData.swift in Sources */,
 				9DE796E6230D7C4B00FF7DC7 /* MovieSearchV.swift in Sources */,
+				9DE796EF23113B8900FF7DC7 /* MovieGenrePagerCell.swift in Sources */,
 				9D40FE8622D77C8900F6C1F8 /* LoginVM.swift in Sources */,
 				9DE796D422F9C4F600FF7DC7 /* SignUpV.swift in Sources */,
 				9DE796D622F9CD1F00FF7DC7 /* SignUpVM.swift in Sources */,
@@ -808,10 +820,6 @@
 					"-framework",
 					"\"UIKit\"",
 					"-framework",
-					"\"XCoordinator\"",
-					"-framework",
-					"\"expanding_collection\"",
-					"-framework",
 					"\"leveldb\"",
 					"-framework",
 					"\"nanopb\"",
@@ -896,10 +904,6 @@
 					"\"Then\"",
 					"-framework",
 					"\"UIKit\"",
-					"-framework",
-					"\"XCoordinator\"",
-					"-framework",
-					"\"expanding_collection\"",
 					"-framework",
 					"\"leveldb\"",
 					"-framework",
