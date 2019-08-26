@@ -9,10 +9,6 @@
 import UIKit
 
 class MovieGenreCollectionViewCell: UICollectionViewCell { //장르 별 셀
-//  let genre: [[String : UIImage]] = [["공포":UIImage(named: "Fear")!], ["로맨스":UIImage(named: "Romance")!],
-//  ["뮤지컬":UIImage(named: "Musical")!], ["애니메이션":UIImage(named: "Animation")!],
-//  ["액션":UIImage(named: "Action")!], ["코미디":UIImage(named: "Comedy")!],
-//  ["판타지":UIImage(named: "Fantasy")!], ["SF":UIImage(named: "SF")!]]
   static let cellIdentifier: String = String(describing: MovieGenreCollectionViewCell.self)
   lazy var genreImage: UIImageView = UIImageView().then {
     $0.layer.cornerRadius = 10
@@ -50,8 +46,13 @@ extension MovieGenreCollectionViewCell {
     }
   }
   
-  func config(dic: [String: UIImage]) {
-    genreImage.image = dic.values.first
-    genreTitle.text = dic.keys.first
+//  func config(dic: [String: UIImage]) {
+//    genreImage.image = dic.values.first
+//    genreTitle.text = dic.keys.first
+//  }
+  
+  func config(type: MovieGenreType) {
+    genreImage.image = type.image
+    genreTitle.text = type.rawValue
   }
 }

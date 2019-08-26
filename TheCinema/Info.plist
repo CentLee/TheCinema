@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>baseUrl</key>
+	<string>https://openapi.naver.com/v1/search/movie.xml?</string>
+	<key>X-Naver-Client-Secret</key>
+	<string>b2fGmUCNa1CZrTHLolhp</string>
+	<key>X-Naver-Client-Id</key>
+	<string>m0B7fUXyT2</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>프로필 사진 저장을 위해 사진첩 권한을 허용하시겠습니까?</string>
 	<key>CFBundleDevelopmentRegion</key>

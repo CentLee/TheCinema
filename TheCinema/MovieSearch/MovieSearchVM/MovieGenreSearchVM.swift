@@ -8,6 +8,24 @@
 
 import Foundation
 
+enum MovieGenreType: String {
+  case fantasy = "판타지"
+  case fear = "공포"
+  case animation = "애니메이션"
+  case action = "액션"
+  case comedy = "코미디"
+  case romance = "로맨스"
+  case musical = "뮤지컬"
+  case sf = "SF"
+  
+  static var arrays: [MovieGenreType] {
+    return [.fear, .romance, .musical, .animation, .action, .comedy, .fantasy, .sf]
+  }
+  
+  var image: UIImage {
+    return UIImage(named: "\(self)")!
+  }
+}
 protocol MovieGenreSearchInput {
   var genre: PublishRelay<String> {get set}
 }
