@@ -1,17 +1,17 @@
 //
-//  MovieGenreData.swift
+//  MovieData.swift
 //  TheCinema
 //
-//  Created by SatGatLee on 25/08/2019.
+//  Created by ChLee on 27/08/2019.
 //  Copyright © 2019 com.example. All rights reserved.
 //
 
 import Foundation
 import ObjectMapper
 
-class MovieGenreList: Mappable {
+class MovieList: Mappable { //영화 검색 리스트
   var start: Int = 0
-  var items: [MovieGenreData] = []
+  var items: [MovieData] = []
   
   required init?(map: Map) { }
   
@@ -21,7 +21,7 @@ class MovieGenreList: Mappable {
   }
 }
 
-class MovieGenreData: Mappable {
+class MovieData: Mappable {
   var title: String = ""
   var link: String = ""
   var image: String = ""
@@ -45,3 +45,4 @@ class MovieGenreData: Mappable {
 //"director": "미키 코이치로|",
 //"actor": "카시이 유우|쿠보타 마사타카|카지와라 히카리|치요 쇼타|요코야마 메구미|카시와바라 슈지|",
 //"userRating": "4.50"
+

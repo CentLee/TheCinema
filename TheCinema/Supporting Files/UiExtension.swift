@@ -17,3 +17,17 @@ extension UIButton {
     kf.setBackgroundImage(with: resource, for: state)
   }
 }
+extension UIImageView {
+  func URLString(urlString: String) {
+    guard urlString != "" else {
+      self.image = UIImage(named: "movieEmpty")
+      return
+    }
+    //String(urlString.split(separator: "|")[0]
+    let url = String(urlString.split(separator: "|")[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+    guard let img_url = URL(string: url) else { return }
+    
+    let resource = ImageResource(downloadURL: img_url, cacheKey: url)
+    kf.setImage(with: resource)
+  }
+}
