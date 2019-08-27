@@ -17,25 +17,22 @@ class MovieGenrePagerCell: FSPagerViewCell {
     $0.backgroundColor = .white
   }
   
-  lazy var moviePoster: UIImageView = UIImageView().then {
-    _ in
-  }
+  lazy var moviePoster: UIImageView = UIImageView()
   
-  lazy var movieInformationV: UIView = UIView().then {
-    $0.backgroundColor = .white
-  }
+  //  lazy var movieInformationV: UIView = UIView().then {
+  //    $0.backgroundColor = .white
+  //  }
   
   lazy var movieTitle: UILabel = UILabel().then {
-    _ in
+    $0.textColor = .white
   }
   
-  lazy var movieUserRating: UILabel = UILabel().then {
-    _ in
-  }
+  //lazy var movieUserRating: UILabel = UILabel()
   
   lazy var movieUserRatingStack: UIStackView = UIStackView().then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
+    $0.backgroundColor = .clear
   }
   
   override init(frame: CGRect) {
@@ -63,13 +60,6 @@ extension MovieGenrePagerCell {
       $0.bottom == $0.superview!.bottom
     }
     
-//    constrain(movieInformationV, moviePoster) {
-//      $0.top    == $1.bottom
-//      $0.left   == $0.superview!.left
-//      $0.right  == $0.superview!.right
-//      $0.bottom == $0.superview!.bottom
-//    }
-    
     constrain(movieTitle) {
       $0.centerX == $0.superview!.centerX
       $0.top     == $0.superview!.top + 10
@@ -95,7 +85,40 @@ extension MovieGenrePagerCell {
     }
   }
   
-  func configPage() {
-    
+  func configPage<T>(movie: T) {
+    if let genreData: MovieGenreData = movie as? MovieGenreData {
+      movieTitle.text = genreData.poster == "" ? genreData.title : ""
+      moviePoster.URLString(urlString: genreData.poster)
+      movieUserRatingStack.isHidden = true
+    }
+      
+    else if let movieData: MovieData = movie as? MovieData {
+      moviePoster.URLString(urlString: movieData.image)
+      movieTitle.text = movieData.title
+      ratingCalculate(rating: Int(movieData.userRating)!)
+    }
+  }
+  
+  private func ratingCalculate(rating: Int) {
+    var previoudIndex: Double = 0.0
+    var currentIndex: Double = 0.0
+    let rating: Double = Double(rating) / 2
+    movieUserRatingStack.arrangedSubviews.enumerated().forEach {
+      currentIndex = Double($0.offset) + 1.0
+      let image: UIImageView = $0.element as! UIImageView
+      if currentIndex <= rating {
+        image.image = UIImage(named: "ic_star_large_full")
+        previoudIndex = currentIndex
+      } else if previoudIndex < rating && currentIndex > rating { //3.5 쩜오같은 사이즈
+        image.image = UIImage(named: "ic_star_large_half")
+        previoudIndex = currentIndex
+      } else {
+        image.image = UIImage(named: "ic_star_large")
+      }
+    }
+  }
+  
+  override func prepareForReuse() {
+    movieTitle.text = ""
   }
 }
