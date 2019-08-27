@@ -8,13 +8,12 @@
 
 import Foundation
 import ObjectMapper
-
 protocol SignUpInterface {
   //input
   var nameText: BehaviorRelay<String?> {get set}
   var emailText: BehaviorRelay<String?> {get set}
   var passwordText: BehaviorRelay<String?> {get set}
-  var profileImg: BehaviorRelay<String?> {get set}
+  var profileImg: BehaviorRelay<Data?> {get set}
   var onSignUpTapped: BehaviorRelay<Void> {get set}
   
   //output
@@ -24,7 +23,7 @@ class SignUpVM: SignUpInterface{
   var nameText: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
   var emailText: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
   var passwordText: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
-  var profileImg: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
+  var profileImg: BehaviorRelay<Data?> = BehaviorRelay<Data?>(value: nil)
   var onSignUpTapped: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
   
   //output
@@ -71,9 +70,34 @@ extension SignUpVM {
     guard let password: String = passwordText.value, let email: String = emailText.value, let name: String = nameText.value else { return }
     Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] (result, error) in
       guard error == nil , let user = result?.user , let self = self else { return }
-      self.ref.child("User").child(user.uid).setValue(["UserInformation": ["user_id": user.uid, "user_name": name, "user_profile_img": self.profileImg.value ?? ""]])
-      self.onSignUp.onNext(())
-      self.ref.removeAllObservers()
+      
+      self.uploadProfileImage(uid: user.uid, onCompleted: { imgURL in
+        self.ref.child("User").child(user.uid).setValue(["UserInformation": ["user_id": user.uid, "user_name": name, "user_profile_img": imgURL]])
+        self.onSignUp.onNext(())
+        self.ref.removeAllObservers()
+      })
     })
+  }
+  
+  private func uploadProfileImage(uid: String, onCompleted: @escaping ((String) -> Void)) {
+    guard let image: Data = profileImg.value else { return }
+    let path = "ProfileImage/\(uid).png"
+    let storage = Storage.storage().reference(forURL: "gs://thecinema-65db1.appspot.com")
+    let imageRef = storage.child(path)
+    let metadata = StorageMetadata()
+    metadata.contentType = "image/jpeg"
+    let uploadTask = imageRef.putData(image, metadata: metadata, completion: { (metadata, error) in
+      if error != nil {
+        print(error!.localizedDescription)
+        return
+      } else { //이미지 저장이 완벽히 됐을 때
+        imageRef.downloadURL(completion: { (url, error) in
+          if let url = url {
+            onCompleted(url.absoluteString)
+          }
+        })
+      }
+    })
+    uploadTask.resume()
   }
 }

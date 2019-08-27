@@ -17,6 +17,5 @@
 @import Cartography;
 @import Kingfisher;
 @import FirebaseAuth;
-@import XCoordinator;
 @import FirebaseDatabase;
 #endif /* TheCinema_Bridging_Header_h */
