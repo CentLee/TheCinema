@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import GoogleSignIn
+import ObjectMapper
 
 enum LoginType {
   case google
@@ -21,7 +22,7 @@ protocol LoginViewModelInterface {
   var onGoogleLogined: PublishSubject<(String, String, AuthCredential)> {get set}
   
   var onLogined: PublishSubject<Void> {get}
-  
+  func userInfo(uid: String)
 }
 class LoginVM: NSObject, LoginViewModelInterface { //이메일 로그인과 구글 로그인 연동.
   //Input
@@ -84,6 +85,14 @@ extension LoginVM {
         self.onLogined.onNext(())
       })
       
+    }
+  }
+  func userInfo(uid: String) {
+    ref.child("User").child("\(uid)").child("UserInformation").observeSingleEvent(of: .value) { (snapshot) in
+      guard !(snapshot.value is NSNull) else { return }
+      guard let item = snapshot.value as? [String:Any] , let data = Mapper<UserInformation>().map(JSON: item) else { return }
+      //let data = Mapper<UserInformation>().map(JSON: item)
+      MainManager.SI.userInfo = data
     }
   }
 }
