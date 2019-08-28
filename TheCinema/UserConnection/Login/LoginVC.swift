@@ -20,11 +20,12 @@ class LoginVC: UIViewController {
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    guard Auth.auth().currentUser == nil else {
+    guard Auth.auth().currentUser != nil , let uid = Auth.auth().currentUser?.uid else {
       //로그인 성공.
-      tabBarSetUp()
       return
     }
+    loginVM.userInfo(uid: uid)
+    tabBarSetUp()
   }
   
   override func viewDidLoad() {
@@ -34,11 +35,7 @@ class LoginVC: UIViewController {
     constrain(loginV, view) {
       $0.edges == $1.safeAreaLayoutGuide.edges
     }
-    
-    for font in UIFont.familyNames {
-      print(font)
-    }
-    
+
     GIDSignIn.sharedInstance().uiDelegate = self
     GIDSignIn.sharedInstance().delegate = self
     setupBind()
@@ -71,8 +68,9 @@ extension LoginVC {
     
     loginVM.onLogined.asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         self?.btnIsEnabled(flag: true)
-        //main flow move
+        self?.loginVM.userInfo(uid: uid)
         self?.tabBarSetUp()
       }).disposed(by: disposeBag)
     

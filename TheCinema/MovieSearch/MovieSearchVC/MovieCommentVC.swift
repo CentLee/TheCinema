@@ -20,12 +20,15 @@ class MovieCommentVC: UIViewController {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
   }
-  lazy var commentText: UITextField = UITextField().then { //textview로 대체
-    $0.borderStyle = .roundedRect
-    $0.contentVerticalAlignment = .top
-    $0.placeholder = "리뷰를 입력해주세요."
-    
+  lazy var commentText: UITextView = UITextView().then { //textview로 대체
+    $0.layer.cornerRadius = 10
+    $0.layer.borderWidth = 1
+    $0.layer.borderColor = textColor.cgColor
+    $0.clipsToBounds = true
+    $0.text = "리뷰를 입력해주세요!"
+    $0.textColor = textColor
   }
+  
   lazy var commentTable: UITableView = UITableView(frame: .zero, style: .grouped).then {
     $0.estimatedRowHeight = 50 
     $0.rowHeight = UITableView.automaticDimension
@@ -36,10 +39,10 @@ class MovieCommentVC: UIViewController {
   }
   
   private var commentList: BehaviorRelay<[MovieComment]> = BehaviorRelay<[MovieComment]>(value: [])
-  private let viewModel: MovieCommentVMType = MovieCommentVM()
+  private var viewModel: MovieCommentVMType?
   private let disposeBag: DisposeBag = DisposeBag()
   private let ref: DatabaseReference = Database.database().reference()
-  
+  private let textColor = UIColor.lightGray.withAlphaComponent(0.5)
   var commentData: MovieComment = MovieComment(JSON: [:])!
   var rating: Int = 0
   var movieId: String = ""
@@ -58,13 +61,15 @@ class MovieCommentVC: UIViewController {
 //MARK:- Custom Function
 extension MovieCommentVC {
   private func bind() {
-    viewModel.inputs.movieSeq.accept(movieId)
+    viewModel = MovieCommentVM()
     
-    viewModel.outputs.comments.subscribe(onNext: { [weak self] (list) in
+    viewModel?.inputs.movieSeq.accept(movieId)
+    
+    viewModel?.outputs.comments.subscribe(onNext: { [weak self] (list) in
       self?.commentList.accept(list)
     }).disposed(by: disposeBag)
     
-    viewModel.outputs.onCompleted.asDriver(onErrorJustReturn: false).filter{$0}
+    viewModel?.outputs.onCompleted.asDriver(onErrorJustReturn: false).filter{$0}
       .drive(onNext: { [weak self] _ in
         self?.clearContext()
       }).disposed(by: disposeBag)
@@ -73,6 +78,20 @@ extension MovieCommentVC {
       .drive(commentTable.rx.items(cellIdentifier: MovieCommentTableViewCell.cellIdentifier, cellType: MovieCommentTableViewCell.self)) { (row, list, cell) in
         cell.config(data: list)
       }.disposed(by: disposeBag)
+    
+    commentText.rx.didChange.asDriver(onErrorJustReturn: ())
+      .drive(onNext: {
+        guard self.commentText.textColor != self.textColor else {
+          self.commentText.text = nil
+          self.commentText.textColor = UIColor.black
+          return
+        }
+        guard self.commentText.text != "" else {
+          self.commentText.text = "리뷰를 입력해주세요!"
+          self.commentText.textColor = self.textColor
+          return
+        }
+      }).disposed(by: disposeBag)
   }
   
   @objc private func cancelAction() {
@@ -82,7 +101,7 @@ extension MovieCommentVC {
   @objc private func registrationAction() { //등록 액션
     guard let text: String = commentText.text, text != "" else { return }
     let formatter: DateFormatter = DateFormatter().then {
-      $0.dateFormat = "YYYY.MM.dd HH:mm"
+      $0.dateFormat = "YYYY-MM-dd HH:mm"
     }
     commentData.rating = rating
     commentData.comment = text
@@ -91,7 +110,7 @@ extension MovieCommentVC {
     commentData.image = MainManager.SI.userInfo.userProfileImage
     commentData.commentKey = ref.child("Comments").child("\(movieId)").childByAutoId().key!
     
-    viewModel.inputs.registerComment(data: commentData)
+    viewModel?.inputs.registerComment(data: commentData)
   }
   
   @objc private func ratingTap(_ gesture: UITapGestureRecognizer) { //탭일 땐 어떤 놈을 눌렀는지에 대한 태그를 먼저 분기처리한 후 터치 포지션에 대해서 다시 한 번 그 객체에 센터보다 큰 지 작은 지 비교.
@@ -104,6 +123,8 @@ extension MovieCommentVC {
     commentData = MovieComment(JSON: [:])! //클리어.
     ratingCalculate(tag: 0, center: (ratingStack.frame.width / 2) + (ratingStack.frame.origin.x), touchLocation: 0)
     commentText.text?.removeAll()
+    commentText.resignFirstResponder()
+    ratingText.text = "0"
   }
   
   private func ratingCalculate(tag: Int, center: CGFloat, touchLocation: CGFloat) { //별점 계산 함수.
@@ -170,10 +191,12 @@ extension MovieCommentVC {
       $0.bottom == $0.superview!.bottom
     }
     
-    for _ in 0..<5 {
+    for i in 1...5 {
       let image: UIImageView = UIImageView()
+      image.tag = i
       image.image = UIImage(named: "ic_star_large")
       image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ratingTap(_:))))
+      image.isUserInteractionEnabled = true
       ratingStack.addArrangedSubview(image)
     }
   }
