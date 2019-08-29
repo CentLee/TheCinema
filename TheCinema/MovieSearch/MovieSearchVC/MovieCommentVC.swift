@@ -27,10 +27,11 @@ class MovieCommentVC: UIViewController {
     $0.clipsToBounds = true
     $0.text = "리뷰를 입력해주세요!"
     $0.textColor = textColor
+    $0.delegate = self
   }
   
   lazy var commentTable: UITableView = UITableView(frame: .zero, style: .grouped).then {
-    $0.estimatedRowHeight = 50 
+    $0.estimatedRowHeight = 50
     $0.rowHeight = UITableView.automaticDimension
     $0.separatorStyle = .none
     $0.delegate = self
@@ -46,7 +47,7 @@ class MovieCommentVC: UIViewController {
   var commentData: MovieComment = MovieComment(JSON: [:])!
   var rating: Int = 0
   var movieId: String = ""
-  
+  var commentDefault: Bool = true
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -79,19 +80,27 @@ extension MovieCommentVC {
         cell.config(data: list)
       }.disposed(by: disposeBag)
     
-    commentText.rx.didChange.asDriver(onErrorJustReturn: ())
-      .drive(onNext: {
-        guard self.commentText.textColor != self.textColor else {
-          self.commentText.text = nil
-          self.commentText.textColor = UIColor.black
-          return
-        }
-        guard self.commentText.text != "" else {
-          self.commentText.text = "리뷰를 입력해주세요!"
-          self.commentText.textColor = self.textColor
-          return
-        }
-      }).disposed(by: disposeBag)
+    //    //commentText.rx.didEndEditing
+    //    commentText.rx.didChange.asDriver(onErrorJustReturn: ())
+    //      .drive(onNext: { [weak self] in
+    //        self?.textViewSetUp()
+    //      }).disposed(by: disposeBag)
+    //
+    //    commentText.rx.text.asDriver(onErrorJustReturn: nil)
+    //      .drive(onNext: { [weak self] str in
+    //        guard let text = self?.commentText.text else { return }
+    //        if text == "리뷰를 입력해주세요!"  {
+    //          self?.navigationItem.rightBarButtonItem?.isEnabled = false
+    //          self?.commentText.text.removeAll()
+    //          self?.commentText.text = str
+    //        }
+    //        self?.navigationItem.rightBarButtonItem?.isEnabled = true
+    //      }).disposed(by: disposeBag)
+    //
+    //    commentText.rx.didEndEditing.asDriver(onErrorJustReturn: ())
+    //      .drive(onNext: { [weak self] in
+    //        self?.textViewSetUp()
+    //      }).disposed(by: disposeBag)
   }
   
   @objc private func cancelAction() {
@@ -116,6 +125,15 @@ extension MovieCommentVC {
   @objc private func ratingTap(_ gesture: UITapGestureRecognizer) { //탭일 땐 어떤 놈을 눌렀는지에 대한 태그를 먼저 분기처리한 후 터치 포지션에 대해서 다시 한 번 그 객체에 센터보다 큰 지 작은 지 비교.
     guard let view = gesture.view else { return }
     ratingCalculate(tag: view.tag, center: (view.frame.width / 2) + (view.frame.origin.x), touchLocation: gesture.location(in: ratingStack).x)
+  }
+  
+  private func textViewSetUp() {
+    if commentText.text == "" {
+      commentText.text = "리뷰를 입력해주세요!"
+      commentText.textColor = textColor
+      navigationItem.rightBarButtonItem?.isEnabled = false
+      
+    }
   }
   
   private func clearContext() {
@@ -208,7 +226,7 @@ extension MovieCommentVC {
   }
 }
 
-extension MovieCommentVC: UITableViewDelegate {
+extension MovieCommentVC: UITableViewDelegate, UITextViewDelegate {
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return commentList.value.count == 0 ? 0 : 30
   }
@@ -217,5 +235,23 @@ extension MovieCommentVC: UITableViewDelegate {
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
+  }
+  
+  //textview
+  func textViewDidEndEditing(_ textView: UITextView) { //view.endediting == return
+    textViewSetUp()
+  }
+  
+  func textViewDidChange(_ textView: UITextView) { //마지막 커서가 되면 다시 되돌리고
+    textViewSetUp()
+  }
+  
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    if textView.text == "리뷰를 입력해주세요!" {
+      textView.text.removeAll()
+      textView.textColor = .black
+      navigationItem.rightBarButtonItem?.isEnabled = true
+    }
+    return true
   }
 }

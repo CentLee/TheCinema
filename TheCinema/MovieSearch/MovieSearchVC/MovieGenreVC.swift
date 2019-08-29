@@ -29,7 +29,7 @@ class MovieGenreVC: UIViewController { //장르별 영화를 보여주는 테이
   private var previousIndex: Int = 0
   var genre: String = "" {
     didSet {
-      self.viewModel.inputs.genreMovieParsing(start: "0", genre: genre)
+      self.viewModel.inputs.genreMovie(start: "0", genre: genre)
     }
   }
   override func viewDidLoad() {
@@ -58,12 +58,12 @@ extension MovieGenreVC {
   }
   
   private func bindViewModel() {
+    
     viewModel.outputs.genreList.asDriver(onErrorJustReturn: MovieGenreResult(JSON: [:])!)
       .drive(onNext: { [weak self] (movieResult) in
         guard let self = self else { return }
         self.startCount += movieResult.movies.count
         self.genreList.accept(self.genreList.value + movieResult.movies)
-        self.backImage(image: self.genreList.value[0].poster)
         self.movieGenrePageView.reloadData()
       }).disposed(by: disposeBag)
   }
@@ -79,15 +79,24 @@ extension MovieGenreVC: FSPagerViewDataSource, FSPagerViewDelegate {
   
   func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
     guard let cell = pagerView.dequeueReusableCell(withReuseIdentifier: MovieGenrePagerCell.cellIdentifier, at: index) as? MovieGenrePagerCell else { return FSPagerViewCell() }
+    if index == 0 {
+      self.backImage(image: genreList.value[0].poster)
+    }
     cell.configPage(movie: genreList.value[index])
     return cell
   }
-
+  
   func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
     if previousIndex != targetIndex && previousIndex != genreList.value.count - 1 {
       backImage(image: genreList.value[targetIndex].poster)
     }
     previousIndex = targetIndex
+  }
+  
+  func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
+    if index == genreList.value.count - 1 {
+      viewModel.inputs.genreMovie(start: "\(startCount)", genre: genre)
+    }
   }
   
   func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {

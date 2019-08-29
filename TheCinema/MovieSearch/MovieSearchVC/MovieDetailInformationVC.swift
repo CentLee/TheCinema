@@ -11,10 +11,11 @@ import UIKit
 enum MovieDetailType: String {
   case summary = "요약정보"
   case plot = "줄거리"
+  case stills = "스틸샷"
   case comment = "최근 리뷰"
   
   static var arrays: [MovieDetailType] {
-    return [.summary, .plot, .comment]
+    return [.summary, .plot, stills, .comment]
   }
 }
 class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리뷰 즐겨찾기
@@ -30,22 +31,23 @@ class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리�
     $0.register(MovieSummaryTableViewCell.self, forCellReuseIdentifier: MovieSummaryTableViewCell.cellIdentifier)
     $0.register(MoviePlotTableViewCell.self, forCellReuseIdentifier: MoviePlotTableViewCell.cellIdentifier)
     $0.register(MovieCommentTableViewCell.self, forCellReuseIdentifier: MovieCommentTableViewCell.cellIdentifier)
+    $0.register(MovieStillShotTableViewCell.self, forCellReuseIdentifier: MovieStillShotTableViewCell.cellIdentifier)
   }
   
   var movieInformation: MovieGenreData = MovieGenreData(JSON: [:])! {
     didSet {
       //영화 코멘트들 가져오면서 데이터 바인드 및 리로드.
-     
+      
     }
   }
   var comments: [String] = []
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      view.backgroundColor = .white
-      layoutSetUp()
-      navigationItem.rightBarButtonItem = UIBarButtonItem(title: "리뷰", style: .plain, target: self, action: #selector(commentWrite))
-        // Do any additional setup after loading the view.
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .white
+    layoutSetUp()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "리뷰", style: .plain, target: self, action: #selector(commentWrite))
+    // Do any additional setup after loading the view.
+  }
 }
 extension MovieDetailInformationVC {
   @objc private func commentWrite() {
@@ -66,11 +68,11 @@ extension MovieDetailInformationVC {
 
 extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 3
+    return 4
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return section == 2 ? comments.count : 1
+    return section == 3 ? comments.count : 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -81,10 +83,13 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
       return cell
     case 1:
       guard let cell = tableView.dequeueReusableCell(withIdentifier: MoviePlotTableViewCell.cellIdentifier, for: indexPath) as? MoviePlotTableViewCell else { return UITableViewCell()}
-      iPrint(movieInformation.plot)
-      cell.plot.text = movieInformation.plot
+      cell.plot.text = movieInformation.plot.split(separator: ".").joined(separator: ".\n\n")
       return cell
-    case 2: break
+    case 2:
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieStillShotTableViewCell.cellIdentifier, for: indexPath) as? MovieStillShotTableViewCell else { return UITableViewCell()}
+      cell.stills.accept(movieInformation.stills.split(separator: "|").map{String($0)})
+      return cell
+    case 3: break
     default:break
     }
     return UITableViewCell()
@@ -102,13 +107,13 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     let v: UIView = UIView()
-    v.backgroundColor = .clear//UIColor.lightGray.withAlphaComponent(0.5)
+    v.backgroundColor = .clear
     return v
   }
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return section == 2 ? 0 : 10
+    return section == 3 ? 0 : 10
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableView.automaticDimension
+    return indexPath.section == 2 ? 200 : UITableView.automaticDimension
   }
 }
