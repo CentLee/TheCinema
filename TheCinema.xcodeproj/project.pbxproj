@@ -45,6 +45,7 @@
 		9DE9D7A62316BEEA000BE9BF /* MovieSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D7A52316BEEA000BE9BF /* MovieSearchVC.swift */; };
 		9DE9D7A82316BF58000BE9BF /* MovieGenreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D7A72316BF58000BE9BF /* MovieGenreVC.swift */; };
 		9DE9D7AA2316BF89000BE9BF /* MovieDetailInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D7A92316BF89000BE9BF /* MovieDetailInformationVC.swift */; };
+		9DE9D7AC23180620000BE9BF /* MovieStillShotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D7AB23180620000BE9BF /* MovieStillShotTableViewCell.swift */; };
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
 		9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */; };
@@ -117,6 +118,7 @@
 		9DE9D7A52316BEEA000BE9BF /* MovieSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieSearchVC.swift; sourceTree = "<group>"; };
 		9DE9D7A72316BF58000BE9BF /* MovieGenreVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieGenreVC.swift; sourceTree = "<group>"; };
 		9DE9D7A92316BF89000BE9BF /* MovieDetailInformationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailInformationVC.swift; sourceTree = "<group>"; };
+		9DE9D7AB23180620000BE9BF /* MovieStillShotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieStillShotTableViewCell.swift; sourceTree = "<group>"; };
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -310,8 +312,7 @@
 				9DE9D7872316BE60000BE9BF /* MovieCommentHelper */,
 				9DE9D7892316BE60000BE9BF /* MovieGenreHelper */,
 			);
-			name = MovieSearchVM;
-			path = "../../../../Downloads/TheCinema-develop/TheCinema/MovieSearch/MovieSearchVM";
+			path = MovieSearchVM;
 			sourceTree = "<group>";
 		};
 		9DE9D7842316BE60000BE9BF /* MovieHelper */ = {
@@ -348,8 +349,7 @@
 				9DE9D7952316BEB3000BE9BF /* MovieSearchCell */,
 				9DE9D79B2316BEB3000BE9BF /* MovieDetailHeaderV.swift */,
 			);
-			name = MovieSearchV;
-			path = "../../../../Downloads/TheCinema-develop/TheCinema/MovieSearch/MovieSearchV";
+			path = MovieSearchV;
 			sourceTree = "<group>";
 		};
 		9DE9D7952316BEB3000BE9BF /* MovieSearchCell */ = {
@@ -359,6 +359,7 @@
 				9DE9D7972316BEB3000BE9BF /* MovieSummaryTableViewCell.swift */,
 				9DE9D7982316BEB3000BE9BF /* MovieGenreCollectionViewCell.swift */,
 				9DE9D7992316BEB3000BE9BF /* MovieGenrePagerCell.swift */,
+				9DE9D7AB23180620000BE9BF /* MovieStillShotTableViewCell.swift */,
 				9DE9D79A2316BEB3000BE9BF /* MoviePlotTableViewCell.swift */,
 			);
 			path = MovieSearchCell;
@@ -623,6 +624,7 @@
 				9DE796D222F9C42E00FF7DC7 /* SignUpVC.swift in Sources */,
 				9DE9D79C2316BEB3000BE9BF /* MovieSearchV.swift in Sources */,
 				9DE9D7822316BE52000BE9BF /* MovieCommentVC.swift in Sources */,
+				9DE9D7AC23180620000BE9BF /* MovieStillShotTableViewCell.swift in Sources */,
 				9DE9D79E2316BEB3000BE9BF /* MovieSummaryTableViewCell.swift in Sources */,
 				9D40FE8222D77C5600F6C1F8 /* LoginVC.swift in Sources */,
 				9DE73FDD22F5A2E700AB2F9D /* UserInformation.swift in Sources */,
