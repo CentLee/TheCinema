@@ -25,14 +25,20 @@ class MovieNetwork { //영화 단일 검색 api network
         let url: String = infoDic["SearchApiBaseUrl"] as? String {
         headers["X-Naver-Client-Id"] = id
         headers["X-Naver-Client-Secret"] = secret
+        iPrint(headers)
         baseUrl = url
       }
     }
   }
   
-  func movieGenreList(start: String, genre: String) -> Observable<MovieGenreList> {
-    return Observable<MovieGenreList>.create { observer in
-      guard let url: URL = URL(string: self.baseUrl + "start=\(start)&genre=\(genre)") else
+  func movieList(query: String, start: Int) -> Observable<MovieList> {
+    let str: String = self.baseUrl + "query=\(query)&display=20&start=\(start)"
+    return Observable<MovieList>.create { observer in
+      guard let encodingStr: String = str.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else
+      {
+        return Disposables.create()
+      }
+      guard let url: URL = URL(string: encodingStr) else
       {
         return Disposables.create()
       }
@@ -40,7 +46,8 @@ class MovieNetwork { //영화 단일 검색 api network
         switch response.result {
         case .success(_):
           guard let json = response.result.value as? [String : Any] else { return }
-          guard let data: MovieGenreList = Mapper<MovieGenreList>().map(JSON: json) else { return }
+          iPrint(json)
+          guard let data: MovieList = Mapper<MovieList>().map(JSON: json) else { return }
           observer.onNext(data)
           observer.onCompleted()
         case .failure(_):

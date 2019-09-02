@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCommentTableViewCell: UITableViewCell {
+class MovieCommentTableViewCell: UITableViewCell { //영화 리뷰 셀
   static let cellIdentifier: String = String(describing: MovieCommentTableViewCell.self)
   
   lazy var profile: UIImageView = UIImageView().then {

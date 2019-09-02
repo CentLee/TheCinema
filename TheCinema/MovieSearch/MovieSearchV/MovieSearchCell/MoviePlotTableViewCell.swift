@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviePlotTableViewCell: UITableViewCell {
+class MoviePlotTableViewCell: UITableViewCell { //영화 줄거리 셀
   static let cellIdentifier: String = String(describing: MoviePlotTableViewCell.self)
   
   lazy var plot: UILabel = UILabel().then {

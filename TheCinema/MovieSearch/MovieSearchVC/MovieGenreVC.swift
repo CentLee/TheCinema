@@ -9,7 +9,7 @@
 import UIKit
 import FSPagerView
 
-class MovieGenreVC: UIViewController { //장르별 영화를 보여주는 테이블 뷰 근데 콜렉션 셀을 사용할 것 같다
+class MovieGenreVC: UIViewController { //장르별 영화를 보여주는 페이지뷰 KMdb api 사용
   lazy var movieGenrePageView: FSPagerView = FSPagerView().then {
     $0.register(MovieGenrePagerCell.self, forCellWithReuseIdentifier: MovieGenrePagerCell.cellIdentifier)
     $0.backgroundColor = .clear

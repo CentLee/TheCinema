@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieGenreCollectionViewCell: UICollectionViewCell { //장르 별 셀
+class MovieGenreCollectionViewCell: UICollectionViewCell { //장르 별 카테고리셀
   static let cellIdentifier: String = String(describing: MovieGenreCollectionViewCell.self)
   lazy var genreImage: UIImageView = UIImageView().then {
     $0.layer.cornerRadius = 10
@@ -46,10 +46,10 @@ extension MovieGenreCollectionViewCell {
     }
   }
   
-//  func config(dic: [String: UIImage]) {
-//    genreImage.image = dic.values.first
-//    genreTitle.text = dic.keys.first
-//  }
+  //  func config(dic: [String: UIImage]) {
+  //    genreImage.image = dic.values.first
+  //    genreTitle.text = dic.keys.first
+  //  }
   
   func config(type: MovieGenreType) {
     genreImage.image = type.image

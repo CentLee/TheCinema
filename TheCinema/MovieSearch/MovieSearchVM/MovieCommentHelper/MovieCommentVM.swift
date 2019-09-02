@@ -12,6 +12,7 @@ import ObjectMapper
 protocol MovieCommentInput { //레이팅이랑 코멘트 받을 것.
   var movieSeq: BehaviorRelay<String> {get set} //이게 들어오면 영화 파싱해서 아웃풋.
   func registerComment(data: MovieComment)
+  func commentList(seq: String, recent: Bool)
 }
 
 protocol MovieCommentOutPut {
@@ -34,22 +35,22 @@ class MovieCommentVM: MovieCommentVMType, MovieCommentInput, MovieCommentOutPut 
   
   private let disposeBag: DisposeBag = DisposeBag()
   private let ref: DatabaseReference = Database.database().reference()
-  init() { bindViewModel() }
+  init() { }
 }
 
 extension MovieCommentVM {
-  func bindViewModel() {
-    movieSeq.filter{$0 != ""}
-      .subscribe(onNext:{ [weak self] (id) in
-        self?.commentList(seq: id)
-      }).disposed(by: disposeBag)
-  }
+  //  func bindViewModel() {
+  //    movieSeq.filter{$0 != ""}
+  //      .subscribe(onNext:{ [weak self] (id) in
+  //        self?.commentList(seq: id)
+  //      }).disposed(by: disposeBag)
+  //  }
   
-  func commentList(seq: String) {
+  func commentList(seq: String, recent: Bool = false) {
     var list: [MovieComment] = []
-    
+    let path = recent ? ref.child("Comments").child("\(seq)").queryLimited(toFirst: 10) : ref.child("Comments").child("\(seq)")
     DispatchQueue.global().async {
-      self.ref.child("Comments").child("\(seq)").observeSingleEvent(of: .value) {[weak self] (snapshot) in
+      path.observeSingleEvent(of: .value) {[weak self] (snapshot) in
         guard !(snapshot.value is NSNull) else { return }
         guard let item = snapshot.value as? [String: Any] else { return }
         for(key, value) in item {
@@ -65,7 +66,7 @@ extension MovieCommentVM {
   }
   
   func registerComment(data: MovieComment) { //코멘트 등록.다 되면 스트림 넘긴다.
-    ref.child("Comments").child("\(movieSeq.value)").childByAutoId().setValue(["name": data.name, "created_at": data.createdAt, "image": data.image, "comment": data.comment, "rating": data.rating, "comment_key": data.commentKey]) { (error, _) in
+    ref.child("Comments").child("\(movieSeq.value)").childByAutoId().setValue(["name": data.name, "created_at": data.createdAt, "image": data.image, "comment": data.comment, "rating": data.rating, "comment_key": data.commentKey, "user_id": data.uid]) { (error, _) in
       guard error == nil else {
         self.onCompleted.onNext(false)
         return

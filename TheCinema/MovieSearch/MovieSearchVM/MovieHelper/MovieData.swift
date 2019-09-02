@@ -26,7 +26,13 @@ class MovieData: Mappable {
   var link: String = ""
   var image: String = ""
   var userRating: String = ""
+  var actor: String = ""
+  var director: String = ""
+  var date: String = ""
   
+  var full: String {
+    return title + " /\(date)년/ \(director)"
+  }
   required init?(map: Map) { }
   
   func mapping(map: Map) {
@@ -34,6 +40,9 @@ class MovieData: Mappable {
     link       <- map["link"]
     image      <- map["image"]
     userRating <- map["userRating"]
+    actor      <- map["actor"]
+    director   <- map["director"]
+    date       <- map["pubDate"]
   }
 }
 
