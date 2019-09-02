@@ -40,7 +40,7 @@ class MovieCommentVC: UIViewController {
   }
   
   private var commentList: BehaviorRelay<[MovieComment]> = BehaviorRelay<[MovieComment]>(value: [])
-  private var viewModel: MovieCommentVMType?
+  private var viewModel: MovieCommentVMType = MovieCommentVM()
   private let disposeBag: DisposeBag = DisposeBag()
   private let ref: DatabaseReference = Database.database().reference()
   private let textColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -48,6 +48,7 @@ class MovieCommentVC: UIViewController {
   var rating: Int = 0
   var movieId: String = ""
   var commentDefault: Bool = true
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -62,15 +63,13 @@ class MovieCommentVC: UIViewController {
 //MARK:- Custom Function
 extension MovieCommentVC {
   private func bind() {
-    viewModel = MovieCommentVM()
+    viewModel.inputs.commentList(seq: movieId, recent: false)
     
-    viewModel?.inputs.movieSeq.accept(movieId)
-    
-    viewModel?.outputs.comments.subscribe(onNext: { [weak self] (list) in
+    viewModel.outputs.comments.subscribe(onNext: { [weak self] (list) in
       self?.commentList.accept(list)
     }).disposed(by: disposeBag)
     
-    viewModel?.outputs.onCompleted.asDriver(onErrorJustReturn: false).filter{$0}
+    viewModel.outputs.onCompleted.asDriver(onErrorJustReturn: false).filter{$0}
       .drive(onNext: { [weak self] _ in
         self?.clearContext()
       }).disposed(by: disposeBag)
@@ -79,28 +78,6 @@ extension MovieCommentVC {
       .drive(commentTable.rx.items(cellIdentifier: MovieCommentTableViewCell.cellIdentifier, cellType: MovieCommentTableViewCell.self)) { (row, list, cell) in
         cell.config(data: list)
       }.disposed(by: disposeBag)
-    
-    //    //commentText.rx.didEndEditing
-    //    commentText.rx.didChange.asDriver(onErrorJustReturn: ())
-    //      .drive(onNext: { [weak self] in
-    //        self?.textViewSetUp()
-    //      }).disposed(by: disposeBag)
-    //
-    //    commentText.rx.text.asDriver(onErrorJustReturn: nil)
-    //      .drive(onNext: { [weak self] str in
-    //        guard let text = self?.commentText.text else { return }
-    //        if text == "리뷰를 입력해주세요!"  {
-    //          self?.navigationItem.rightBarButtonItem?.isEnabled = false
-    //          self?.commentText.text.removeAll()
-    //          self?.commentText.text = str
-    //        }
-    //        self?.navigationItem.rightBarButtonItem?.isEnabled = true
-    //      }).disposed(by: disposeBag)
-    //
-    //    commentText.rx.didEndEditing.asDriver(onErrorJustReturn: ())
-    //      .drive(onNext: { [weak self] in
-    //        self?.textViewSetUp()
-    //      }).disposed(by: disposeBag)
   }
   
   @objc private func cancelAction() {
@@ -118,8 +95,9 @@ extension MovieCommentVC {
     commentData.name = MainManager.SI.userInfo.userName
     commentData.image = MainManager.SI.userInfo.userProfileImage
     commentData.commentKey = ref.child("Comments").child("\(movieId)").childByAutoId().key!
+    commentData.uid = MainManager.SI.userInfo.userId
     
-    viewModel?.inputs.registerComment(data: commentData)
+    viewModel.inputs.registerComment(data: commentData)
   }
   
   @objc private func ratingTap(_ gesture: UITapGestureRecognizer) { //탭일 땐 어떤 놈을 눌렀는지에 대한 태그를 먼저 분기처리한 후 터치 포지션에 대해서 다시 한 번 그 객체에 센터보다 큰 지 작은 지 비교.

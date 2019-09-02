@@ -18,7 +18,7 @@ enum MovieDetailType: String {
     return [.summary, .plot, stills, .comment]
   }
 }
-class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리뷰 즐겨찾기
+class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리뷰 즐겨찾기 ) KMDB API 사용해서 전체적인 데이터를 즉시 표현
   //데이터 들어오면 리뷰랑 즐겨찾기 가져온다. 영화 이름에 해당하는 코멘트만.
   //테이블 뷰 섹션 멀티플로 구성.
   lazy var movieInfoTable: UITableView = UITableView(frame: .zero, style: .grouped).then {
@@ -40,13 +40,24 @@ class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리�
       
     }
   }
-  var comments: [String] = []
+  
+  private let viewModel: MovieCommentVMType = MovieCommentVM()
+  private var commentList: BehaviorRelay<[MovieComment]> = BehaviorRelay<[MovieComment]>(value: [])
+  private let disposeBag: DisposeBag = DisposeBag()
+  
+  override func viewWillAppear(_ animated: Bool) {
+    viewModel.inputs.commentList(seq: movieInformation.movieSeq, recent: true)
+    if movieInformation.movieSeq == "" { //없으면 박스오피스에서 타고 들어온 것이므로 데이터를 파싱한다.
+      
+    }
+  }
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     layoutSetUp()
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "리뷰", style: .plain, target: self, action: #selector(commentWrite))
-    // Do any additional setup after loading the view.
+    
+    bind()
   }
 }
 extension MovieDetailInformationVC {
@@ -64,6 +75,17 @@ extension MovieDetailInformationVC {
     
     movieInfoTable.reloadData()
   }
+  
+  private func bind() {
+    viewModel.outputs.comments.subscribe(onNext: { [weak self] (list) in
+      self?.commentList.accept(list)
+    }).disposed(by: disposeBag)
+    
+    commentList.filter{!$0.isEmpty}.asDriver(onErrorJustReturn: [])
+      .drive(onNext : { [weak self] _ in
+        self?.movieInfoTable.reloadData()
+      }).disposed(by: disposeBag)
+  }
 }
 
 extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
@@ -72,7 +94,7 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return section == 3 ? comments.count : 1
+    return section == 3 ? commentList.value.count : 1
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,7 +111,10 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieStillShotTableViewCell.cellIdentifier, for: indexPath) as? MovieStillShotTableViewCell else { return UITableViewCell()}
       cell.stills.accept(movieInformation.stills.split(separator: "|").map{String($0)})
       return cell
-    case 3: break
+    case 3:
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieCommentTableViewCell.cellIdentifier, for: indexPath) as? MovieCommentTableViewCell else { return UITableViewCell()}
+      cell.config(data: commentList.value[indexPath.row])
+      return cell
     default:break
     }
     return UITableViewCell()
@@ -115,5 +140,13 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return indexPath.section == 2 ? 200 : UITableView.automaticDimension
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cell.alpha = 0
+    
+    UIView.animate(withDuration: 0.5) {
+      cell.alpha = 1
+    }
   }
 }

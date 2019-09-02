@@ -9,10 +9,6 @@
 import UIKit
 
 class MovieSearchVC: UIViewController { //장르별 검색 및 단일 검색
-  //  let genre: [[String : UIImage]] = [["공포":UIImage(named: "Fear")!], ["로맨스":UIImage(named: "Romance")!],
-  //                                     ["뮤지컬":UIImage(named: "Musical")!], ["애니메이션":UIImage(named: "Animation")!],
-  //                                     ["액션":UIImage(named: "Action")!], ["코미디":UIImage(named: "Comedy")!],
-  //                                     ["판타지":UIImage(named: "Fantasy")!], ["SF":UIImage(named: "SF")!]]
   
   lazy var movieSearchV: MovieSerachV = MovieSerachV().then {
     $0.backgroundColor = .white
@@ -24,7 +20,7 @@ class MovieSearchVC: UIViewController { //장르별 검색 및 단일 검색
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
-    
+    title = "검색"
     layoutSetUp()
     bind()
   }
@@ -55,6 +51,24 @@ extension MovieSearchVC {
         vc.genre = MovieGenreType.arrays[indexPath.row].rawValue
         self.navigationController?.pushViewController(vc, animated: true)
       }).disposed(by: disposeBag)
+    
+    movieSearchV.searchPanel.searchField.rx.controlEvent(.editingDidBegin).asDriver(onErrorJustReturn: ())
+      .drive(onNext: { [weak self] _ in
+        let vc = MovieDetailSearchVC()
+        self?.navigationController?.pushViewController(vc, animated: true)
+        self?.movieSearchV.searchPanel.searchField.resignFirstResponder()
+        vc.searchPanel.searchField.becomeFirstResponder()
+        //      self?.present(UINavigationController(rootViewController: vc), animated: true, completion: {
+        //        self?.movieSearchV.searchPanel.searchField.resignFirstResponder()
+        //      })
+      }).disposed(by: disposeBag)
+    //    movieSearchV.searchPanel.searchField.rx..asDriver(onErrorJustReturn: nil)
+    //      .drive(onNext: { [weak self] _ in
+    //        let vc = MovieDetailSearchVC()
+    //        self?.present(UINavigationController(rootViewController: vc), animated: true, completion: {
+    //          self?.movieSearchV.searchPanel.searchField.resignFirstResponder()
+    //        })
+    //      }).disposed(by: disposeBag)
   }
 }
 

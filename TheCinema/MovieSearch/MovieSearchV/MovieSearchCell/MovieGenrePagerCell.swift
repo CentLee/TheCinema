@@ -9,7 +9,7 @@
 import UIKit
 import FSPagerView
 
-class MovieGenrePagerCell: FSPagerViewCell {
+class MovieGenrePagerCell: FSPagerViewCell { //영화 장르 셀
   static let cellIdentifier: String = String(describing: MovieGenrePagerCell.self)
   lazy var backV: UIView = UIView().then {
     $0.layer.cornerRadius = 10
@@ -98,10 +98,13 @@ extension MovieGenrePagerCell {
       movieUserRatingStack.isHidden = false
       ratingCalculate(rating: Int(movieData.userRating)!)
     }
-    
+      
     else if let stills: String = movie as? String {
       moviePoster.URLString(urlString: stills)
+      backV.layer.cornerRadius = 0
     }
+    
+    //else if let
   }
   
   private func ratingCalculate(rating: Int) {

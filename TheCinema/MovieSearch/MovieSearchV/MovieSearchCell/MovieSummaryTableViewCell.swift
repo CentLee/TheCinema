@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieSummaryTableViewCell: UITableViewCell { //영화 간략정보 뷰
+class MovieSummaryTableViewCell: UITableViewCell { //영화 간략정보 셀
   static let cellIdentifier: String = String(describing: MovieSummaryTableViewCell.self)
   
   lazy var moviePoster: UIImageView = UIImageView().then {
@@ -39,7 +39,7 @@ extension MovieSummaryTableViewCell {
     
     constrain(moviePoster) {
       $0.top    == $0.superview!.top + 10
-      $0.left   == $0.superview!.left + 20
+      $0.left   == $0.superview!.left + 10
       $0.width  == 100
       $0.height == $0.width
     }
