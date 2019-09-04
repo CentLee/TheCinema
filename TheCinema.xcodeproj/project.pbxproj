@@ -57,6 +57,12 @@
 		9DEA95BC22E0BB3700D936F6 /* TheCinema-Bridging-Header.h in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */; };
 		9DEA95BD22E0BB3700D936F6 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA95BB22E0BB3700D936F6 /* Fonts */; };
 		9DEF7B3022DCB6F10009988B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */; };
+		9DEFBF412320001C0063E1BB /* UserMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF402320001B0063E1BB /* UserMenuView.swift */; };
+		9DEFBF44232000290063E1BB /* UserProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF42232000290063E1BB /* UserProfileEditViewModel.swift */; };
+		9DEFBF45232000290063E1BB /* UserProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF43232000290063E1BB /* UserProfileEditViewController.swift */; };
+		9DEFBF492320002F0063E1BB /* UserMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF462320002F0063E1BB /* UserMenuViewModel.swift */; };
+		9DEFBF4A2320002F0063E1BB /* UserMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF472320002F0063E1BB /* UserMenuTableViewCell.swift */; };
+		9DEFBF4B2320002F0063E1BB /* UserMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFBF482320002F0063E1BB /* UserMenuViewController.swift */; };
 		9DF60FBD231580AD008F3AE6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9DE79717231574D200FF7DC7 /* Info.plist */; };
 		9DF9E75822E32D0F00823BEA /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DF9E75722E32D0F00823BEA /* KakaoOpenSDK.framework */; };
 /* End PBXBuildFile section */
@@ -138,6 +144,12 @@
 		9DEA95BA22E0BB3600D936F6 /* TheCinema-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheCinema-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DEA95BB22E0BB3700D936F6 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		9DEF7B2F22DCB6F10009988B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9DEFBF402320001B0063E1BB /* UserMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuView.swift; sourceTree = "<group>"; };
+		9DEFBF42232000290063E1BB /* UserProfileEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEditViewModel.swift; sourceTree = "<group>"; };
+		9DEFBF43232000290063E1BB /* UserProfileEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileEditViewController.swift; sourceTree = "<group>"; };
+		9DEFBF462320002F0063E1BB /* UserMenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuViewModel.swift; sourceTree = "<group>"; };
+		9DEFBF472320002F0063E1BB /* UserMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuTableViewCell.swift; sourceTree = "<group>"; };
+		9DEFBF482320002F0063E1BB /* UserMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuViewController.swift; sourceTree = "<group>"; };
 		9DF9E75722E32D0F00823BEA /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		A241D7AFF76B014612F8BDEA /* Pods-TheCinema.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheCinema.release.xcconfig"; path = "Target Support Files/Pods-TheCinema/Pods-TheCinema.release.xcconfig"; sourceTree = "<group>"; };
 		C95A9F90FE0EDFF32DECA933 /* Pods_TheCinemaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheCinemaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,6 +222,7 @@
 		9D094E6422D3854D00EAA0E6 /* TheCinema */ = {
 			isa = PBXGroup;
 			children = (
+				9DEFBF3E232000080063E1BB /* UserMenu */,
 				9DE796DF230D790900FF7DC7 /* MovieSearch */,
 				9DE796D722FC5BC300FF7DC7 /* Supporting Files */,
 				9DE796DA22FEDC8500FF7DC7 /* BoxOffice */,
@@ -403,6 +416,27 @@
 				9DE796DD230C30A700FF7DC7 /* BoxOfficeVM.swift */,
 			);
 			path = BoxOfficeVM;
+			sourceTree = "<group>";
+		};
+		9DEFBF3E232000080063E1BB /* UserMenu */ = {
+			isa = PBXGroup;
+			children = (
+				9DEFBF472320002F0063E1BB /* UserMenuTableViewCell.swift */,
+				9DEFBF482320002F0063E1BB /* UserMenuViewController.swift */,
+				9DEFBF462320002F0063E1BB /* UserMenuViewModel.swift */,
+				9DEFBF402320001B0063E1BB /* UserMenuView.swift */,
+				9DEFBF3F232000100063E1BB /* UserProfileEdit */,
+			);
+			path = UserMenu;
+			sourceTree = "<group>";
+		};
+		9DEFBF3F232000100063E1BB /* UserProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				9DEFBF43232000290063E1BB /* UserProfileEditViewController.swift */,
+				9DEFBF42232000290063E1BB /* UserProfileEditViewModel.swift */,
+			);
+			path = UserProfileEdit;
 			sourceTree = "<group>";
 		};
 		DFB64D046210CAADB013D83E /* Pods */ = {
@@ -662,6 +696,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DE796D222F9C42E00FF7DC7 /* SignUpVC.swift in Sources */,
+				9DEFBF45232000290063E1BB /* UserProfileEditViewController.swift in Sources */,
 				9DE9D79C2316BEB3000BE9BF /* MovieSearchV.swift in Sources */,
 				9DE9D7822316BE52000BE9BF /* MovieCommentVC.swift in Sources */,
 				9DE9D7AC23180620000BE9BF /* MovieStillShotTableViewCell.swift in Sources */,
@@ -673,14 +708,17 @@
 				9DE796CF22F9B92D00FF7DC7 /* MainManager.swift in Sources */,
 				9DE9D7A82316BF58000BE9BF /* MovieGenreVC.swift in Sources */,
 				9DE9D7B4231D5CB1000BE9BF /* MovieLinkVC.swift in Sources */,
+				9DEFBF44232000290063E1BB /* UserProfileEditViewModel.swift in Sources */,
 				9DE79716231574B600FF7DC7 /* UiExtension.swift in Sources */,
 				9D40FE8422D77C7E00F6C1F8 /* LoginV.swift in Sources */,
 				9DE9D78E2316BE60000BE9BF /* MovieNetwork.swift in Sources */,
 				9DE9D7912316BE60000BE9BF /* MovieGenreSearchVM.swift in Sources */,
+				9DEFBF492320002F0063E1BB /* UserMenuViewModel.swift in Sources */,
 				9DE9D7BE231D5DD1000BE9BF /* BackContentV.swift in Sources */,
 				9DE9D78D2316BE60000BE9BF /* MovieData.swift in Sources */,
 				9DE9D7BA231D5D2B000BE9BF /* MovieSearchPanelV.swift in Sources */,
 				9DE9D7B6231D5CB8000BE9BF /* MovieDetailSearchVC.swift in Sources */,
+				9DEFBF412320001C0063E1BB /* UserMenuView.swift in Sources */,
 				9DE9D7AE231D5C52000BE9BF /* BoxOfficeNetwork.swift in Sources */,
 				9DE9D7A62316BEEA000BE9BF /* MovieSearchVC.swift in Sources */,
 				9DE9D7902316BE60000BE9BF /* MovieGenreData.swift in Sources */,
@@ -696,8 +734,10 @@
 				9DE9D7A22316BEB3000BE9BF /* MovieDetailHeaderV.swift in Sources */,
 				9DE9D7A12316BEB3000BE9BF /* MoviePlotTableViewCell.swift in Sources */,
 				9DE9D7B0231D5C5B000BE9BF /* BoxOfficeData.swift in Sources */,
+				9DEFBF4B2320002F0063E1BB /* UserMenuViewController.swift in Sources */,
 				9DE796DE230C30A700FF7DC7 /* BoxOfficeVM.swift in Sources */,
 				9DE96B4922E491FF00997C14 /* gConstants.swift in Sources */,
+				9DEFBF4A2320002F0063E1BB /* UserMenuTableViewCell.swift in Sources */,
 				9DE9D7AA2316BF89000BE9BF /* MovieDetailInformationVC.swift in Sources */,
 				9DE9D7BC231D5D5F000BE9BF /* MovieSearchDetailTableViewCell.swift in Sources */,
 			);

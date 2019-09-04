@@ -71,8 +71,9 @@ extension SignUpVM {
     Auth.auth().createUser(withEmail: email, password: password, completion: { [weak self] (result, error) in
       guard error == nil , let user = result?.user , let self = self else { return }
       
-      self.uploadProfileImage(uid: user.uid, onCompleted: { imgURL in
+      MainManager.SI.uploadProfileImage(uid: user.uid, profileImage: self.profileImg.value, onCompleted: { (imgURL) in
         self.ref.child("User").child(user.uid).setValue(["UserInformation": ["user_id": user.uid, "user_name": name, "user_profile_img": imgURL]])
+        //self.ref.child("UserName").childByAutoId().setValue(["userName" : name]) //중복검사용 플래그 형식으로 넣고.
         self.onSignUp.onNext(())
         self.ref.removeAllObservers()
       })
@@ -80,7 +81,10 @@ extension SignUpVM {
   }
   
   private func uploadProfileImage(uid: String, onCompleted: @escaping ((String) -> Void)) {
-    guard let image: Data = profileImg.value else { return }
+    guard let image: Data = profileImg.value else {
+      onCompleted("")
+      return
+    }
     let path = "ProfileImage/\(uid).png"
     let storage = Storage.storage().reference(forURL: "gs://thecinema-65db1.appspot.com")
     let imageRef = storage.child(path)

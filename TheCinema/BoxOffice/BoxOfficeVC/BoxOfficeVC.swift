@@ -8,6 +8,7 @@
 
 import UIKit
 import FSPagerView
+import NotificationBannerSwift
 
 class BoxOfficeVC: UIViewController { //일일 박스오피스 뷰. 유저 디폴트 값에 현재 런칭 했을 때의 날짜 값을 들고오고 날짜 값이 없거나 다를경우 최신화 해서 갖고 온다 그럼 매일 최신화 되는 거승로.
   //상세 정보는 movieDetailInfoVC 사용.
@@ -23,6 +24,7 @@ class BoxOfficeVC: UIViewController { //일일 박스오피스 뷰. 유저 디�
   lazy var backImageView: UIImageView = UIImageView()
   lazy var boxOfficeInfoV: UIView = UIView().then { //박스 오피스 영화의 간략 정보 뷰
     $0.backgroundColor = .white
+    $0.layer.cornerRadius = 8
   }
   lazy var rank: UILabel = UILabel()
   lazy var name: UILabel = UILabel()
@@ -42,24 +44,21 @@ class BoxOfficeVC: UIViewController { //일일 박스오피스 뷰. 유저 디�
     $0.dateFormat = "YYYYMMdd"
   }
   private var previousIndex: Int = 0
-  
-  override func viewWillAppear(_ animated: Bool) {
-    guard let currentDate = UserDefaults().string(forKey: "currentDate"), currentDate != "" else { //파싱했으나 데이터가 공백이면 바로 파싱
-      viewModel.input.boxOfficeSearch(date: formatter.string(from: Date().addingTimeInterval(-86400))) //오늘 데이터로 파싱
-      UserDefaults.standard.set(formatter.string(from: Date().addingTimeInterval(-86400)), forKey: "currentDate")
-      return
-    }
-    //값이 있다?
-    guard let date = formatter.date(from: currentDate)?.compare(Date()) , date == ComparisonResult.orderedSame ||  date == ComparisonResult.orderedDescending else { return }
-    
-    viewModel.input.boxOfficeSearch(date: formatter.string(from: Date().addingTimeInterval(-86400))) //오늘 데이터로 파싱
-    UserDefaults.standard.set(formatter.string(from: Date().addingTimeInterval(-86400)), forKey: "currentDate")
+  lazy var banner: FloatingNotificationBanner = FloatingNotificationBanner().then {
+    $0.autoDismiss = false
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    layoutSetUp()
+    bind()
     // Do any additional setup after loading the view.
+    banner = FloatingNotificationBanner(title: "로딩 중", subtitle: "오늘 현재 박스오피스 목록을 가져오는 중입니다.\n잠시만 기다려주세요", leftView: UIImageView(image: UIImage(named: "loading")!), style: .info)
+    banner.show()
+    viewModel.input.boxOfficeSearch(date: formatter.string(from: Date().addingTimeInterval(-86400)))
+    
+    //여기서 파베에 임시 저장. 오늘 자로.
   }
 }
 extension BoxOfficeVC {
@@ -83,7 +82,7 @@ extension BoxOfficeVC {
     
     constrain(boxOfficeInfoV, boxOfficePageView) {
       $0.width   == 200
-      $0.height  == 100
+      $0.height  == 120
       $0.top     == $1.bottom + 20
       $0.centerX == $0.superview!.centerX
     }
@@ -94,8 +93,16 @@ extension BoxOfficeVC {
   }
   
   private func bind() {
-    viewModel.output.boxOfficeInfo.asDriver(onErrorJustReturn: [])
-      .drive(onNext: { [weak self] list in
+    viewModel.output.boxOfficeInfo
+      .subscribe(onNext: { [weak self] list in
+        self?.boxOfficeList.accept(list)
+        
+      }).disposed(by: disposeBag)
+    
+    boxOfficeList.filter{!$0.isEmpty}.asDriver(onErrorJustReturn: [])
+      .drive(onNext: { [weak self] _ in
+        self?.banner.dismiss()
+        self?.dataBind(index: 0)
         self?.boxOfficePageView.reloadData()
       }).disposed(by: disposeBag)
   }
@@ -124,9 +131,18 @@ extension BoxOfficeVC: FSPagerViewDelegate, FSPagerViewDataSource {
   }
   
   func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int) {
-    if previousIndex != targetIndex && previousIndex != boxOfficeList.value.count - 1 {
+    if 0 == targetIndex && previousIndex == boxOfficeList.value.count - 1  { //다르고 마지막 타겟이
+      return
+    } else {
       dataBind(index: targetIndex)
+      previousIndex = targetIndex
     }
-    previousIndex = targetIndex
+  }
+  
+  func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+    let vc = MovieDetailInformationVC()
+    vc.movieInformation = boxOfficeList.value[index]
+    navigationController?.pushViewController(vc, animated: true)
+    pagerView.deselectItem(at: index, animated: true)
   }
 }

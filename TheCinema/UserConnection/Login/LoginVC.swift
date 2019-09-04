@@ -10,7 +10,7 @@ import UIKit
 import GoogleSignIn
 
 class LoginVC: UIViewController {
-  //MARK:- 로그인 화면 
+  //MARK:- 로그인 화면
   lazy var loginV: LoginV = LoginV()
   private let loginVM: LoginVM = LoginVM()
   private let disposeBag: DisposeBag = DisposeBag()
@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
     constrain(loginV, view) {
       $0.edges == $1.safeAreaLayoutGuide.edges
     }
-
+    
     GIDSignIn.sharedInstance().uiDelegate = self
     GIDSignIn.sharedInstance().delegate = self
     setupBind()
@@ -64,7 +64,7 @@ extension LoginVC {
       }).disposed(by: disposeBag)
     
     loginV.loginBtn.rx.tap.asDriver()
-    .drive(loginVM.onLoginTapped).disposed(by: disposeBag)
+      .drive(loginVM.onLoginTapped).disposed(by: disposeBag)
     
     loginVM.onLogined.asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in
@@ -75,7 +75,7 @@ extension LoginVC {
       }).disposed(by: disposeBag)
     
     loginV.signUpBtn.rx.tap
-    .asDriver()
+      .asDriver()
       .drive(onNext: { [weak self] in
         let vc: SignUpVC = SignUpVC()
         self?.present(vc, animated: true, completion: nil)
@@ -87,8 +87,10 @@ extension LoginVC {
     firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
     let secondVC = MovieSearchVC()
     secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+    let threeVC = UserMenuViewController()
+    threeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
     let tabbar: UITabBarController = UITabBarController()
-    tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), UINavigationController(rootViewController: secondVC)]
+    tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), UINavigationController(rootViewController: secondVC), UINavigationController(rootViewController: threeVC)]
     present(tabbar, animated: true, completion: nil)
   }
 }

@@ -27,18 +27,28 @@ class BoxOfficeVM: BoxOfficeType, BoxOfficeInput, BoxOfficeOutput {
   var output: BoxOfficeOutput {return self}
   
   private let disposeBag: DisposeBag = DisposeBag()
+  private let ref: DatabaseReference = Database.database().reference()
+  
   var boxOffice: [BoxOfficeData] = [] {
     didSet {
-      boxOfficeList(list: boxOffice)
+      boxOfficeList()
     }
   }
   var boxOfficeInfo: PublishSubject<[MovieGenreData]> = PublishSubject<[MovieGenreData]>()
 }
 extension BoxOfficeVM {
-  private func boxOfficeList(list: [BoxOfficeData]) {
-    BoxOfficeNetwork.SI.boxOfficeSearch(list: list)
-      .subscribe(onNext : { [weak self] list in
-        self?.boxOfficeInfo.onNext(list)
+  private func boxOfficeList() {
+    var movieList: [MovieGenreData] = []
+    Observable.from(boxOffice)
+      .enumerated()
+      .concatMap { (index, data) -> Observable<MovieGenreData> in
+        return BoxOfficeNetwork.SI.boxOfficeMovie(movieNm: data.movieName, date: data.openDate.replacingOccurrences(of: "-", with: ""))
+      }
+      .subscribe(onNext: { (data) in
+        movieList.append(data)
+      }, onCompleted: {
+        iPrint(movieList.count)
+        self.boxOfficeInfo.onNext(movieList)
       }).disposed(by: disposeBag)
   }
   
