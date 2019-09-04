@@ -19,8 +19,8 @@ class MovieSummaryTableViewCell: UITableViewCell { //영화 간략정보 셀
   lazy var movieGenre: UILabel = UILabel()
   lazy var movieTitle: UILabel = UILabel()
   lazy var movieActors: UILabel = UILabel().then {
-    $0.numberOfLines = 0
-    $0.lineBreakMode = .byWordWrapping
+    $0.numberOfLines = 2
+    $0.lineBreakMode = .byTruncatingTail
   }
   lazy var movieDirectors: UILabel = UILabel()
   
@@ -79,6 +79,6 @@ extension MovieSummaryTableViewCell {
     movieGenre.text = info.full
     movieDate.text = info.repRlsDate == "" ? "미개봉" : "\(info.repRlsDate) 개봉"
     movieDirectors.text = "감독: " + info.directors.map{ $0.name }.joined(separator: ", ")
-    movieActors.text = "출연: " + info.actors.map{ $0.name }.joined(separator: ", ")
+    movieActors.text = "출연: " + info.actors.map{ $0.name }.joined(separator: ", ").replacingOccurrences(of: "!HS ", with: "").replacingOccurrences(of: " !HE ", with: "")
   }
 }

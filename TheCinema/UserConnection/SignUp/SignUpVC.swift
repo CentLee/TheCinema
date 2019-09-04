@@ -61,7 +61,7 @@ extension SignUpVC {
     signUpV.passwordText.rx.text.filter{$0 != ""}.asDriver(onErrorJustReturn: "").drive(signUpVM.passwordText).disposed(by: disposeBag)
     
     signUpV.cancelBtn.rx.tap
-    .asDriver()
+      .asDriver()
       .drive(onNext: { [weak self] in
         self?.dismiss(animated: true, completion: nil)
       }).disposed(by: disposeBag)
@@ -75,7 +75,7 @@ extension SignUpVC {
       }).disposed(by: disposeBag)
     
     signUpV.signUpBtn.rx.tap.map{self.loadingView.startAnimating()}.asDriver(onErrorJustReturn: ())
-    .drive(signUpVM.onSignUpTapped).disposed(by: disposeBag)
+      .drive(signUpVM.onSignUpTapped).disposed(by: disposeBag)
     
     signUpV.profileImage.rx.tap.asDriver(onErrorJustReturn: ())
       .drive(onNext: { [weak self] in

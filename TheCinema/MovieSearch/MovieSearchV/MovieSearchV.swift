@@ -50,19 +50,6 @@ extension MovieSerachV {
       $0.top    == $0.superview!.top + 20
     }
     
-    //    constrain(searchIcn) {
-    //      $0.width   == 16
-    //      $0.height  == $0.width
-    //      $0.centerY == $0.superview!.centerY
-    //      $0.left    == $0.superview!.left + 10
-    //    }
-    //
-    //    constrain(searchField, searchIcn) {
-    //      $0.left    == $1.right + 10
-    //      $0.centerY == $0.superview!.centerY
-    //      $0.right   == $0.superview!.right
-    //    }
-    
     constrain(searchTitle, searchPanel) {
       $0.top  == $1.bottom + 30
       $0.left == $1.left
