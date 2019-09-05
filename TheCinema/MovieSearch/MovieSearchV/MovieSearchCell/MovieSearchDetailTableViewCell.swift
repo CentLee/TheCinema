@@ -14,7 +14,7 @@ class MovieSearchDetailTableViewCell: UITableViewCell { //영화 단일 검색 �
   
   lazy var movieBackV: BackContentV = BackContentV().then {
     $0.layer.masksToBounds = false
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.tableColor
   }
   
   lazy var moviePoster: UIImageView = UIImageView().then {
@@ -25,13 +25,18 @@ class MovieSearchDetailTableViewCell: UITableViewCell { //영화 단일 검색 �
   lazy var movieTitle: UILabel = UILabel().then {
     $0.lineBreakMode = .byTruncatingTail
     $0.numberOfLines = 0
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
   }
   
   lazy var ratingStack: UIStackView = UIStackView().then {
     $0.axis = .horizontal
     $0.distribution = .fillEqually
   }
-  lazy var rating: UILabel = UILabel()
+  lazy var rating: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

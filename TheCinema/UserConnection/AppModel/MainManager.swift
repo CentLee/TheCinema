@@ -14,6 +14,9 @@ class MainManager {
   
   var userInfo: UserInformation = UserInformation(JSON: [:])! //로그인시 받는 유저 정보
   private let ref: DatabaseReference = Database.database().reference()
+  let bgColor: UIColor = UIColor(hexString: "#F9EEEF") //backgroundColor
+  let textColor: UIColor = UIColor(hexString: "#474747") //textColor
+  let tableColor: UIColor = UIColor(hexString: "#F7F7F7")
 }
 extension MainManager {
   func ratingCalculate(rating: Int, stackV: UIStackView) {
@@ -67,5 +70,20 @@ extension MainManager {
       }
     })
     uploadTask.resume()
+  }
+  
+  func navigationAppearance(navi: UINavigationController?) {
+    navi?.navigationBar.barTintColor = bgColor
+    navi?.navigationBar.tintColor = textColor
+    navi?.navigationBar.isTranslucent = false
+    navi?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : textColor, NSAttributedString.Key.font : UIFont(name: "NanumSquareOTFEB", size: 20)!]
+  }
+  
+  func TextFieldSetted(_ field: UITextField) {
+    field.borderStyle = .roundedRect
+    field.autocorrectionType = .no
+    field.autocapitalizationType = .none
+    field.textColor = textColor
+    field.font = UIFont(name: "NanumSquareOTFR", size:15)
   }
 }

@@ -10,12 +10,17 @@ import UIKit
 import NotificationBannerSwift
 
 class UserMenuViewController: UIViewController { //유저 탭 즐겨 찾기 & 조회수 높은 장르 탑 3, 유저 프로필 편집.
-  lazy var userMenuView: UserMenuView = UserMenuView()
+  lazy var userMenuView: UserMenuView = UserMenuView().then {
+    $0.backgroundColor = MainManager.SI.bgColor//UIColor(hexString: "#F8D1D1")
+    $0.layer.borderWidth = 3
+    $0.layer.borderColor = UIColor(hexString: "#F8D1D1").cgColor
+  }
   
   lazy var userMenuContentTable: UITableView = UITableView().then {
     $0.separatorStyle = .none
     $0.rowHeight = 120
     $0.register(MovieSearchDetailTableViewCell.self, forCellReuseIdentifier: MovieSearchDetailTableViewCell.cellIdentifier)
+    $0.backgroundColor = MainManager.SI.tableColor
   }
   lazy var menuBtn: UIButton = UIButton().then {
     $0.setImage(UIImage(named: "ic_list"), for: .normal)
@@ -34,9 +39,10 @@ class UserMenuViewController: UIViewController { //유저 탭 즐겨 찾기 & �
   }
   override func viewDidLoad() { //버튼 누를 때 마다 값들 가져오기.
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     layoutSetUp()
     navigationSetUp()
+    MainManager.SI.navigationAppearance(navi: navigationController)
     bind()
   }
 }
@@ -108,6 +114,7 @@ extension UserMenuViewController {
           do  {
             try Auth.auth().signOut()
             MainManager.SI.userInfo = UserInformation(JSON: [:])!
+            self.navigationController?.popToRootViewController(animated: true)
           } catch(let err) {
             iPrint(err.localizedDescription)
           }

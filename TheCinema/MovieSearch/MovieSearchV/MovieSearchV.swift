@@ -11,12 +11,16 @@ import Foundation
 class MovieSerachV: UIView {
   
   lazy var searchPanel: MovieSearchPanelV = MovieSearchPanelV().then {
-    $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+    $0.backgroundColor = MainManager.SI.bgColor
     $0.layer.cornerRadius = 10
+    $0.layer.borderWidth = 1.5
+    $0.layer.borderColor = MainManager.SI.textColor.cgColor
   }
   
   lazy var searchTitle: UILabel = UILabel().then {
     $0.text = "찾고 싶은 영화의 장르를 선택해보세요"
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
   lazy var genreCollection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
@@ -26,7 +30,7 @@ class MovieSerachV: UIView {
     layout.scrollDirection = .vertical
     $0.collectionViewLayout = layout
     $0.register(MovieGenreCollectionViewCell.self, forCellWithReuseIdentifier: MovieGenreCollectionViewCell.cellIdentifier)
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.bgColor
   }
   
   override init(frame: CGRect) {

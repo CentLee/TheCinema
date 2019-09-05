@@ -31,13 +31,14 @@ class LoginVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubview(loginV)
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     constrain(loginV, view) {
       $0.edges == $1.safeAreaLayoutGuide.edges
     }
     
     GIDSignIn.sharedInstance().uiDelegate = self
     GIDSignIn.sharedInstance().delegate = self
+    
     setupBind()
   }
 }
@@ -91,6 +92,10 @@ extension LoginVC {
     threeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 2)
     let tabbar: UITabBarController = UITabBarController()
     tabbar.viewControllers = [UINavigationController(rootViewController: firstVC), UINavigationController(rootViewController: secondVC), UINavigationController(rootViewController: threeVC)]
+    tabbar.tabBar.barTintColor = MainManager.SI.bgColor
+    tabbar.tabBar.unselectedItemTintColor = UIColor.lightGray.withAlphaComponent(0.5)
+    tabbar.tabBar.tintColor = MainManager.SI.textColor
+    tabbar.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "NanumSquareOTFB", size: 12)], for: .normal)
     present(tabbar, animated: true, completion: nil)
   }
 }

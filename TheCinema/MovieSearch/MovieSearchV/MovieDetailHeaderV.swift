@@ -10,7 +10,10 @@ import Foundation
 
 class MovieDetailHeaderV: UIView { //헤더 섹션 뷰
   
-  lazy var title: UILabel = UILabel()
+  lazy var title: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
+  }
   
   lazy var btn: UIButton = UIButton().then {
     $0.isHidden = true
@@ -24,7 +27,7 @@ class MovieDetailHeaderV: UIView { //헤더 섹션 뷰
   convenience init(text: String) {
     self.init(frame: .zero)
     title.text = text
-    backgroundColor = .white
+    backgroundColor = MainManager.SI.bgColor
     layoutSetUp()
   }
   required init?(coder aDecoder: NSCoder) {

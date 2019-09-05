@@ -11,13 +11,15 @@ import Foundation
 class MovieSearchPanelV: UIView {
   lazy var searchIcn: UIImageView = UIImageView().then {
     $0.image = UIImage(named: "search")?.withRenderingMode(.alwaysTemplate)
-    $0.tintColor = UIColor.lightGray
+    $0.tintColor = MainManager.SI.textColor
   }
   
   lazy var searchField: UITextField = UITextField().then {
     $0.borderStyle = .none
     $0.backgroundColor = .clear
     $0.placeholder = "영화 이름을 검색해주세요"
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
   override init(frame: CGRect) {

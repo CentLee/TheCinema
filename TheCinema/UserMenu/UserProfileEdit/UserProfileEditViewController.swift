@@ -19,17 +19,19 @@ class UserProfileEditViewController: UIViewController {
   }
   lazy var nameTitle: UILabel = UILabel().then {
     $0.text = "닉네임"
+    $0.textColor = MainManager.SI.textColor
   }
   lazy var separatorLine: UIView = UIView().then {
     $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
   }
   lazy var nameField: UITextField = UITextField().then {
     $0.placeholder = "닉네임을 입력하세요"
-    $0.borderStyle = .roundedRect
+    MainManager.SI.TextFieldSetted($0)
+    $0.textColor = MainManager.SI.textColor
   }
   lazy var completeBtn: UIButton = UIButton().then {
     $0.setTitle("수정", for: .normal)
-    $0.setTitleColor(.black, for: .normal)
+    $0.setTitleColor(MainManager.SI.textColor, for: .normal)
     $0.isEnabled = false
   }
   
@@ -38,7 +40,7 @@ class UserProfileEditViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     layoutSetUp()
     bind()
   }

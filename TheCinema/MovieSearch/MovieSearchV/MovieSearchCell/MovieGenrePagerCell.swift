@@ -14,13 +14,13 @@ class MovieGenrePagerCell: FSPagerViewCell { //영화 장르 셀
   lazy var backV: UIView = UIView().then {
     $0.layer.cornerRadius = 10
     $0.clipsToBounds = true
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.bgColor
   }
   
   lazy var moviePoster: UIImageView = UIImageView()
   
   lazy var movieTitle: UILabel = UILabel().then {
-    $0.textColor = .white
+    $0.textColor = MainManager.SI.bgColor
   }
   
   lazy var movieUserRatingStack: UIStackView = UIStackView().then {

@@ -15,14 +15,28 @@ class MovieSummaryTableViewCell: UITableViewCell { //영화 간략정보 셀
     $0.layer.cornerRadius = 10
     $0.clipsToBounds = true
   }
-  lazy var movieDate: UILabel = UILabel()
-  lazy var movieGenre: UILabel = UILabel()
-  lazy var movieTitle: UILabel = UILabel()
+  lazy var movieDate: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
+  lazy var movieGenre: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
+  lazy var movieTitle: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
+  }
   lazy var movieActors: UILabel = UILabel().then {
     $0.numberOfLines = 2
     $0.lineBreakMode = .byTruncatingTail
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
-  lazy var movieDirectors: UILabel = UILabel()
+  lazy var movieDirectors: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,6 +85,8 @@ extension MovieSummaryTableViewCell {
       $0.right  == $1.right
       $0.bottom <= $0.superview!.bottom - 10
     }
+    
+    contentView.backgroundColor = MainManager.SI.bgColor
   }
   
   func config(info: MovieGenreData) {

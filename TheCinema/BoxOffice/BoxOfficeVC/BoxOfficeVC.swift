@@ -23,13 +23,25 @@ class BoxOfficeVC: UIViewController { //일일 박스오피스 뷰. 유저 디�
   
   lazy var backImageView: UIImageView = UIImageView()
   lazy var boxOfficeInfoV: UIView = UIView().then { //박스 오피스 영화의 간략 정보 뷰
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.bgColor
     $0.layer.cornerRadius = 8
   }
-  lazy var rank: UILabel = UILabel()
-  lazy var name: UILabel = UILabel()
-  lazy var audience: UILabel = UILabel()
-  lazy var openDate: UILabel = UILabel()
+  lazy var rank: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
+  lazy var name: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
+  lazy var audience: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
+  lazy var openDate: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
   lazy var infoStack: UIStackView = UIStackView().then {
     $0.axis = .vertical
     $0.distribution = .equalSpacing
@@ -50,15 +62,14 @@ class BoxOfficeVC: UIViewController { //일일 박스오피스 뷰. 유저 디�
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    title = "일일 박스오피스"
+    view.backgroundColor = MainManager.SI.bgColor
     layoutSetUp()
     bind()
-    // Do any additional setup after loading the view.
-    banner = FloatingNotificationBanner(title: "로딩 중", subtitle: "오늘 현재 박스오피스 목록을 가져오는 중입니다.\n잠시만 기다려주세요", leftView: UIImageView(image: UIImage(named: "loading")!), style: .info)
+    MainManager.SI.navigationAppearance(navi: navigationController)
+    banner = FloatingNotificationBanner(title: "로딩 중", subtitle: "오늘 현재 박스오피스 목록을 가져오는 중입니다.\n잠시만 기다려주세요", titleFont: UIFont(name: "NanumSquareOTFEB", size: 17)!, subtitleFont: UIFont(name: "NanumSquareOTFR", size: 15)!, leftView: UIImageView(image: UIImage(named: "loading")!), style: .info)
     banner.show()
     viewModel.input.boxOfficeSearch(date: formatter.string(from: Date().addingTimeInterval(-86400)))
-    
-    //여기서 파베에 임시 저장. 오늘 자로.
   }
 }
 extension BoxOfficeVC {
@@ -77,7 +88,7 @@ extension BoxOfficeVC {
       $0.left    == $0.superview!.left
       $0.right   == $0.superview!.right
       $0.height  == 300
-      $0.centerY == $0.superview!.centerY
+      $0.centerY == $0.superview!.centerY - 100
     }
     
     constrain(boxOfficeInfoV, boxOfficePageView) {

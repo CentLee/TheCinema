@@ -10,18 +10,21 @@ import Foundation
 
 class UserMenuView: UIView {
   lazy var userInfoView: UIView = UIView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.bgColor
   }
   lazy var userProfile: UIImageView = UIImageView().then {
     $0.layer.cornerRadius = 25
     $0.clipsToBounds = true
   }
-  lazy var userName: UILabel = UILabel()
+  lazy var userName: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
+  }
   
   lazy var menuTable: UITableView = UITableView(frame: .zero, style: .grouped).then {
     $0.rowHeight = 50
     $0.register(UserMenuTableViewCell.self, forCellReuseIdentifier: UserMenuTableViewCell.cellIdentifier)
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.tableColor
   }
   var datasource: UserMenuTableViewDataSource?
   var delegate: UserMenuTableViewDelegate?

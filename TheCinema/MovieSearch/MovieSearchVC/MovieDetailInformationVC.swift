@@ -59,6 +59,7 @@ class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리�
       searchViewModel.input.movieDetailSearch(seq: movieInformation.movieSeq)
       return
     }
+    viewModel.inputs.myFavorite(seq: movieInformation.movieSeq)
     viewModel.inputs.commentList(seq: movieInformation.movieSeq, recent: true)
   }
   override func viewDidLoad() {
@@ -108,7 +109,7 @@ extension MovieDetailInformationVC {
         guard let self = self else { return }
         self.movieInformation = info
         self.viewModel.inputs.commentList(seq: self.movieInformation.movieSeq, recent: true) //데이터 가져왔으면 코멘트도 가져온다.
-        self.viewModel.inputs.myFavorite(seq: self.movieInformation.movieSeq)
+        
       }).disposed(by: disposeBag)
   }
 }

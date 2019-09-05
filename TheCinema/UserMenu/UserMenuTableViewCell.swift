@@ -29,7 +29,10 @@ class UserMenuTableViewCell: UITableViewCell { //조회율 높은 장르에도 �
   lazy var menuIcn: UIImageView = UIImageView().then {
     $0.layer.cornerRadius = 10
   }
-  lazy var menuTitle: UILabel = UILabel()
+  lazy var menuTitle: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
+  }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
