@@ -11,7 +11,7 @@ import UIKit
 class MovieSearchVC: UIViewController { //장르별 검색 및 단일 검색
   
   lazy var movieSearchV: MovieSerachV = MovieSerachV().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = MainManager.SI.bgColor
   }
   
   private let viewModel: MovieGenreSearchType = MovieGenreSearchVM()
@@ -19,10 +19,11 @@ class MovieSearchVC: UIViewController { //장르별 검색 및 단일 검색
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     title = "검색"
     layoutSetUp()
     bind()
+    MainManager.SI.navigationAppearance(navi: navigationController)
   }
 }
 extension MovieSearchVC {

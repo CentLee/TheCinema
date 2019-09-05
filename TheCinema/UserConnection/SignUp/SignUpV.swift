@@ -10,9 +10,7 @@ import UIKit
 
 class SignUpV: UIView { //회원가입 뷰
   //이름 중복 플로우.
-  lazy var contentView: UIView = UIView().then {
-    $0.backgroundColor = .white
-  }
+  lazy var contentView: UIView = UIView()
   
   lazy var profileImage: UIButton = UIButton().then {
     $0.setBackgroundImage(UIImage(named:"user"), for: .normal)
@@ -31,18 +29,18 @@ class SignUpV: UIView { //회원가입 뷰
   
   lazy var nameText: UITextField = UITextField().then {
     $0.placeholder = "별명"
-    TextFieldSetted($0)
+    MainManager.SI.TextFieldSetted($0)
   }
   
   lazy var emailText: UITextField = UITextField().then {
     $0.placeholder = "이메일"
-    TextFieldSetted($0)
+    MainManager.SI.TextFieldSetted($0)
   }
   
   lazy var passwordText: UITextField = UITextField().then {
     $0.placeholder = "비밀번호"
     $0.isSecureTextEntry = true
-    TextFieldSetted($0)
+    MainManager.SI.TextFieldSetted($0)
   }
   
   lazy var btnStack: UIStackView = UIStackView().then {
@@ -55,10 +53,12 @@ class SignUpV: UIView { //회원가입 뷰
     $0.setTitleColor(.black, for: .normal)
     $0.setTitleColor(.lightGray, for: .disabled)
     $0.isEnabled = false
+    $0.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size:15)
   }
   lazy var cancelBtn: UIButton = UIButton().then {
     $0.setTitle("취소", for: .normal)
     $0.setTitleColor(.black, for: .normal)
+    $0.titleLabel?.font = UIFont(name: "NanumSquareOTFR", size:15)
   }
   
   override init(frame: CGRect) {
@@ -100,11 +100,5 @@ extension SignUpV {
       $0.top     == $1.bottom + 20
       $0.centerX == $1.centerX
     }
-  }
-  
-  private func TextFieldSetted(_ field: UITextField) {
-    field.borderStyle = .roundedRect
-    field.autocorrectionType = .no
-    field.autocapitalizationType = .none
   }
 }

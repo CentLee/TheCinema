@@ -12,14 +12,17 @@ import FSPagerView
 class MovieDetailSearchVC: UIViewController { //단일 검색 후 리스트 보여주는 뷰. Naver Search Api 사용
   
   lazy var searchPanel: MovieSearchPanelV = MovieSearchPanelV().then {
-    $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+    $0.backgroundColor = MainManager.SI.bgColor
     $0.layer.cornerRadius = 10
+    $0.layer.borderWidth = 1.5
+    $0.layer.borderColor = MainManager.SI.textColor.cgColor
   }
   
   lazy var movieTable: UITableView = UITableView().then {
     $0.register(MovieSearchDetailTableViewCell.self, forCellReuseIdentifier: MovieSearchDetailTableViewCell.cellIdentifier)
     $0.separatorStyle = .none
     $0.rowHeight = 120
+    $0.backgroundColor = MainManager.SI.tableColor
   }
   
   private let disposeBag: DisposeBag = DisposeBag()
@@ -29,7 +32,7 @@ class MovieDetailSearchVC: UIViewController { //단일 검색 후 리스트 보�
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     layoutSetUp()
     bind()
   }

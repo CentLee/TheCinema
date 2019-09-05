@@ -14,7 +14,8 @@ class MoviePlotTableViewCell: UITableViewCell { //영화 줄거리 셀
   lazy var plot: UILabel = UILabel().then {
     $0.numberOfLines = 0
     $0.lineBreakMode = .byWordWrapping
-    $0.textColor = .black
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -35,5 +36,7 @@ extension MoviePlotTableViewCell {
       $0.right  == $0.superview!.right - 10
       $0.bottom <= $0.superview!.bottom - 10
     }
+    
+    contentView.backgroundColor = MainManager.SI.bgColor
   }
 }

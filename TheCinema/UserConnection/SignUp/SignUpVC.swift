@@ -14,9 +14,7 @@ class SignUpVC: UIViewController {
   private let signUpVM: SignUpVM = SignUpVM()
   private let disposeBag: DisposeBag = DisposeBag()
   
-  lazy var signUpV: SignUpV = SignUpV().then {
-    $0.backgroundColor = .white
-  }
+  lazy var signUpV: SignUpV = SignUpV()
   
   lazy var loadingView: UIActivityIndicatorView = UIActivityIndicatorView().then {
     $0.style = .whiteLarge
@@ -31,7 +29,7 @@ class SignUpVC: UIViewController {
 }
 extension SignUpVC {
   private func layoutSetUp() {
-    view.backgroundColor = .white
+    view.backgroundColor = MainManager.SI.bgColor
     view.addSubview(signUpV)
     view.addSubview(loadingView)
     

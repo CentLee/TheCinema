@@ -17,6 +17,8 @@ class MovieGenreCollectionViewCell: UICollectionViewCell { //장르 별 카테�
   
   lazy var genreTitle: UILabel = UILabel().then {
     $0.textAlignment = .center
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFB", size: 15)
   }
   
   override init(frame: CGRect) {

@@ -16,7 +16,10 @@ class MovieCommentTableViewCell: UITableViewCell { //영화 리뷰 셀
     $0.clipsToBounds = true
   }
   
-  lazy var nameText: UILabel = UILabel()
+  lazy var nameText: UILabel = UILabel().then {
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
+  }
   
   lazy var ratingStack: UIStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -25,11 +28,14 @@ class MovieCommentTableViewCell: UITableViewCell { //영화 리뷰 셀
   
   lazy var dateText: UILabel = UILabel().then {
     $0.textColor = .lightGray
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 13)
   }
   
   lazy var commentText: UILabel = UILabel().then {
     $0.numberOfLines = 0
     $0.lineBreakMode = .byWordWrapping
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -81,6 +87,7 @@ extension MovieCommentTableViewCell {
       image.image = UIImage(named: "ic_star_large")
       ratingStack.addArrangedSubview(image)
     }
+    contentView.backgroundColor = MainManager.SI.bgColor
   }
   
   func config(data: MovieComment) {

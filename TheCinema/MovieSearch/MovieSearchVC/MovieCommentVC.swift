@@ -10,11 +10,13 @@ import UIKit
 
 class MovieCommentVC: UIViewController {
   lazy var commentInputView: UIView = UIView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = UIColor(hexString: "#F7F7F7")
   }
   lazy var ratingPanel: UIView = UIView()
   lazy var ratingText: UILabel = UILabel().then {
     $0.text = "0"
+    $0.textColor = MainManager.SI.textColor
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   lazy var ratingStack: UIStackView = UIStackView().then {
     $0.axis = .horizontal
@@ -23,11 +25,12 @@ class MovieCommentVC: UIViewController {
   lazy var commentText: UITextView = UITextView().then { //textview로 대체
     $0.layer.cornerRadius = 10
     $0.layer.borderWidth = 1
-    $0.layer.borderColor = textColor.cgColor
+    $0.layer.borderColor = MainManager.SI.textColor.cgColor
     $0.clipsToBounds = true
     $0.text = "리뷰를 입력해주세요!"
     $0.textColor = textColor
     $0.delegate = self
+    $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
   lazy var commentTable: UITableView = UITableView(frame: .zero, style: .grouped).then {
@@ -35,7 +38,7 @@ class MovieCommentVC: UIViewController {
     $0.rowHeight = UITableView.automaticDimension
     $0.separatorStyle = .none
     $0.delegate = self
-    $0.backgroundColor = .white
+    $0.backgroundColor = UIColor(hexString: "#F7F7F7")
     $0.register(MovieCommentTableViewCell.self, forCellReuseIdentifier: MovieCommentTableViewCell.cellIdentifier)
   }
   
