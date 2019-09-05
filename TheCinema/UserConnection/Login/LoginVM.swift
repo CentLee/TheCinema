@@ -33,7 +33,7 @@ class LoginVM: NSObject, LoginViewModelInterface { //이메일 로그인과 구�
   
   //output
   var onLogined: PublishSubject<Void> = PublishSubject<Void>()
-
+  
   private var userName: String! //구글 로그인용
   private var userProfileImage: String! //구글 로그인용
   private var ref: DatabaseReference!

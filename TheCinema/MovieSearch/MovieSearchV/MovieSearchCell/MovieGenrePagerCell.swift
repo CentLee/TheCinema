@@ -19,15 +19,9 @@ class MovieGenrePagerCell: FSPagerViewCell { //영화 장르 셀
   
   lazy var moviePoster: UIImageView = UIImageView()
   
-  //  lazy var movieInformationV: UIView = UIView().then {
-  //    $0.backgroundColor = .white
-  //  }
-  
   lazy var movieTitle: UILabel = UILabel().then {
     $0.textColor = .white
   }
-  
-  //lazy var movieUserRating: UILabel = UILabel()
   
   lazy var movieUserRatingStack: UIStackView = UIStackView().then {
     $0.axis = .horizontal

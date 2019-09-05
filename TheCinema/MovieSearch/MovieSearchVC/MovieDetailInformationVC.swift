@@ -34,6 +34,12 @@ class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리�
     $0.register(MovieStillShotTableViewCell.self, forCellReuseIdentifier: MovieStillShotTableViewCell.cellIdentifier)
   }
   
+  lazy var favoriteBtn: UIButton = UIButton().then {
+    $0.setImage(UIImage(named: "unFavorite"), for: .normal)
+    $0.setImage(UIImage(named: "favorite"), for: .selected)
+    $0.isHighlighted = false
+  }
+  
   var movieInformation: MovieGenreData = MovieGenreData(JSON: [:])! {
     didSet {
       //영화 코멘트들 가져오면서 데이터 바인드 및 리로드.
@@ -42,30 +48,29 @@ class MovieDetailInformationVC: UIViewController { //영화 상세정보 ( 리�
   }
   
   private let viewModel: MovieCommentVMType = MovieCommentVM()
+  private let searchViewModel: MovieSearchType = MovieSearchVM()
   private var commentList: BehaviorRelay<[MovieComment]> = BehaviorRelay<[MovieComment]>(value: [])
   private let disposeBag: DisposeBag = DisposeBag()
   
   override func viewWillAppear(_ animated: Bool) {
-    viewModel.inputs.commentList(seq: movieInformation.movieSeq, recent: true)
-    if movieInformation.movieSeq == "" { //없으면 박스오피스에서 타고 들어온 것이므로 데이터를 파싱한다.
-      
+    
+    //들어왔는데 데이터가 없으면..... 파싱을 해와야한다.이건 나중에 할까....그럼 의미가 업센 시바이밪
+    guard movieInformation.title != "" else {
+      searchViewModel.input.movieDetailSearch(seq: movieInformation.movieSeq)
+      return
     }
+    viewModel.inputs.commentList(seq: movieInformation.movieSeq, recent: true)
   }
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     layoutSetUp()
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "리뷰", style: .plain, target: self, action: #selector(commentWrite))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(customView: favoriteBtn)
     
     bind()
   }
 }
 extension MovieDetailInformationVC {
-  @objc private func commentWrite() {
-    let vc = MovieCommentVC()
-    vc.movieId = movieInformation.movieSeq
-    present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
-  }
   private func layoutSetUp() {
     view.addSubview(movieInfoTable)
     
@@ -81,9 +86,29 @@ extension MovieDetailInformationVC {
       self?.commentList.accept(list)
     }).disposed(by: disposeBag)
     
-    commentList.filter{!$0.isEmpty}.asDriver(onErrorJustReturn: [])
+    commentList.asDriver(onErrorJustReturn: []) //댓글이 없어졌을 경우도 생각해서.
       .drive(onNext : { [weak self] _ in
         self?.movieInfoTable.reloadData()
+      }).disposed(by: disposeBag)
+    
+    favoriteBtn.rx.tap.asDriver(onErrorJustReturn: ())
+      .drive(onNext: { [weak self] in
+        guard let self = self else { return }
+        self.viewModel.inputs.favorite(info: self.movieInformation)
+      }).disposed(by: disposeBag)
+    
+    viewModel.outputs.favoriteMovie.asDriver(onErrorJustReturn: false)
+      .drive(favoriteBtn.rx.isSelected).disposed(by: disposeBag)
+    
+    viewModel.outputs.favoriteEnabled.asDriver(onErrorJustReturn: false)
+      .drive(favoriteBtn.rx.isSelected).disposed(by: disposeBag)
+    
+    searchViewModel.output.movieInfo.asDriver(onErrorJustReturn: MovieGenreData(JSON: [:])!)
+      .drive(onNext: { [weak self] info in
+        guard let self = self else { return }
+        self.movieInformation = info
+        self.viewModel.inputs.commentList(seq: self.movieInformation.movieSeq, recent: true) //데이터 가져왔으면 코멘트도 가져온다.
+        self.viewModel.inputs.myFavorite(seq: self.movieInformation.movieSeq)
       }).disposed(by: disposeBag)
   }
 }
@@ -122,7 +147,14 @@ extension MovieDetailInformationVC: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let v = MovieDetailHeaderV(text: MovieDetailType.arrays[section].rawValue)
-    v.btn.isHidden = section != 2
+    v.btn.isHidden = section != 3
+    v.btn.rx.tap.asDriver(onErrorJustReturn: ())
+      .drive(onNext: { [weak self] in
+        guard let self = self else { return }
+        let vc = MovieCommentVC()
+        vc.movieId = self.movieInformation.movieSeq
+        self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+      }).disposed(by: disposeBag)
     return v
   }
   

@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import NotificationBannerSwift
 
 class UserMenuViewController: UIViewController { //유저 탭 즐겨 찾기 & 조회수 높은 장르 탑 3, 유저 프로필 편집.
   lazy var userMenuView: UserMenuView = UserMenuView()
   
   lazy var userMenuContentTable: UITableView = UITableView().then {
     $0.separatorStyle = .none
+    $0.rowHeight = 120
+    $0.register(MovieSearchDetailTableViewCell.self, forCellReuseIdentifier: MovieSearchDetailTableViewCell.cellIdentifier)
   }
   lazy var menuBtn: UIButton = UIButton().then {
     $0.setImage(UIImage(named: "ic_list"), for: .normal)
@@ -23,6 +26,7 @@ class UserMenuViewController: UIViewController { //유저 탭 즐겨 찾기 & �
   
   var leftConstraint: NSLayoutConstraint = NSLayoutConstraint() //메뉴 넓이 제약
   var currentMenu: BehaviorRelay<UserMenuType?> = BehaviorRelay<UserMenuType?>(value: nil) //기본값은 프로필 닐
+  var favoriteList: BehaviorRelay<[MovieFavoriteData]> = BehaviorRelay<[MovieFavoriteData]>(value: [])
   
   override func viewWillAppear(_ animated: Bool) {
     userMenuView.userProfile.URLString(urlString: MainManager.SI.userInfo.userProfileImage)
@@ -77,12 +81,12 @@ extension UserMenuViewController {
         self.userMenuView.frame.origin.x = -4000
       }).disposed(by: disposeBag)
     
-//    view.rx.tapGesture().when(.recognized).asDriver(onErrorJustReturn: UITapGestureRecognizer())
-//      .drive(onNext: { [weak self] _ in
-//        guard let self = self else { return }
-//        self.leftConstraint.constant = -4000
-//        self.menuBtn.isSelected = !self.menuBtn.isSelected
-//      }).disposed(by: disposeBag)
+    //    view.rx.tapGesture().when(.recognized).asDriver(onErrorJustReturn: UITapGestureRecognizer())
+    //      .drive(onNext: { [weak self] _ in
+    //        guard let self = self else { return }
+    //        self.leftConstraint.constant = -4000
+    //        self.menuBtn.isSelected = !self.menuBtn.isSelected
+    //      }).disposed(by: disposeBag)
     
     //Todo 1.즐겨찾기 , 2. 조회율순 보여주기
     
@@ -92,11 +96,12 @@ extension UserMenuViewController {
         switch indexPath.row {
         case 0: //즐겨찾기
           self.viewModel.input.favoriteList()
+          self.clearContext(type: UserMenuType.arrays[0])
         case 1:
           self.viewModel.input.inquiryTopList()
+          self.clearContext(type: UserMenuType.arrays[1])
         case 2:
-          self.userMenuView.frame.origin.x = -4000
-          self.menuBtn.isSelected = !self.menuBtn.isSelected
+          self.clearContext(type: UserMenuType.arrays[2])
           let vc = UserProfileEditViewController()
           self.navigationController?.pushViewController(vc, animated: true)
         case 3://logout
@@ -106,9 +111,49 @@ extension UserMenuViewController {
           } catch(let err) {
             iPrint(err.localizedDescription)
           }
-        default:
-          break
+        default: break
         }
       }).disposed(by: disposeBag)
+    
+    viewModel.output.favoriteMovies
+      .map { list -> [MovieFavoriteData] in
+        guard !list.isEmpty else {
+          //경고창
+          let banner = FloatingNotificationBanner(title: "데이터", subtitle: "즐겨찾기 데이터가 없습니다. 등록 후 이용 바랍니다.", style: .warning)
+          banner.show()
+          return []
+        }
+        return list
+      }
+      .subscribe(onNext: { [weak self] list in
+        self?.favoriteList.accept(list)
+      }).disposed(by: disposeBag)
+    
+    favoriteList.filter{!$0.isEmpty}.asDriver(onErrorJustReturn: [])
+      .drive(userMenuContentTable.rx.items(cellIdentifier: MovieSearchDetailTableViewCell.cellIdentifier, cellType: MovieSearchDetailTableViewCell.self)) {
+        (row, movie, cell) in
+        cell.config(info: movie)
+      }.disposed(by: disposeBag)
+    
+    userMenuContentTable.rx.itemSelected.asDriver(onErrorJustReturn: IndexPath())
+      .drive(onNext: { [weak self] indexPath in
+        guard let self = self else { return }
+        guard self.currentMenu.value != UserMenuType.favorite else { //즐겨찾기의 셀을 선택
+          let vc = MovieDetailInformationVC()
+          vc.movieInformation.movieSeq = self.favoriteList.value[indexPath.row].movieSeq
+          self.navigationController?.pushViewController(vc, animated: true)
+          self.userMenuContentTable.deselectRow(at: indexPath, animated: false)
+          self.clearContext(type: UserMenuType.favorite)
+          return
+        }
+        
+        
+      }).disposed(by: disposeBag)
+  }
+  private func clearContext(type: UserMenuType) {
+    title = type.rawValue
+    userMenuView.frame.origin.x = -4000
+    menuBtn.isSelected = false
+    self.currentMenu.accept(type)
   }
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import ObjectMapper
 
 protocol UserMenuInput {
   func favoriteList()
@@ -15,7 +15,7 @@ protocol UserMenuInput {
 }
 
 protocol UserMenuOutput {
-  
+  var favoriteMovies: PublishSubject<[MovieFavoriteData]> {get set}
 }
 
 protocol UserMenuViewModelType {
@@ -26,7 +26,10 @@ protocol UserMenuViewModelType {
 class UserMenuViewModel: UserMenuViewModelType, UserMenuInput, UserMenuOutput {
   var input: UserMenuInput {return self}
   var output: UserMenuOutput {return self}
- 
+  
+  
+  var favoriteMovies: PublishSubject<[MovieFavoriteData]> = PublishSubject<[MovieFavoriteData]>()
+  
   private let disposeBag: DisposeBag = DisposeBag()
   private let ref: DatabaseReference = Database.database().reference()
   
@@ -34,7 +37,20 @@ class UserMenuViewModel: UserMenuViewModelType, UserMenuInput, UserMenuOutput {
 
 extension UserMenuViewModel {
   func favoriteList() {
-    
+    var list: [MovieFavoriteData] = []
+    ref.child("User").child(MainManager.SI.userInfo.userId).child("FavoriteMovie").observeSingleEvent(of: .value) { (snapshot) in
+      guard !(snapshot.value is NSNull) else {
+        self.favoriteMovies.onNext([])
+        return
+      }
+      guard let item = snapshot.value as? [String : Any] else { return }
+      for(_, value) in item {
+        guard let movie = value as? [String : Any] , let data = Mapper<MovieFavoriteData>().map(JSON: movie) else { return }
+        list.append(data)
+      }
+      self.favoriteMovies.onNext(list)
+    }
+    ref.removeAllObservers()
   }
   
   func inquiryTopList() {

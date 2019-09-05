@@ -46,11 +46,6 @@ extension MovieGenreCollectionViewCell {
     }
   }
   
-  //  func config(dic: [String: UIImage]) {
-  //    genreImage.image = dic.values.first
-  //    genreTitle.text = dic.keys.first
-  //  }
-  
   func config(type: MovieGenreType) {
     genreImage.image = type.image
     genreTitle.text = type.rawValue

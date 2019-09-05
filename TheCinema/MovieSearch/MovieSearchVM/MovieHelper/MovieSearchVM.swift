@@ -11,10 +11,12 @@ import Foundation
 
 protocol MovieSearchInput {
   func movieSearch(title: String, start: Int)
+  func movieDetailSearch(seq: String)
 }
 
 protocol MovieSearchOutPut {
   var movieList: PublishSubject<[MovieData]> {get set}
+  var movieInfo: PublishSubject<MovieGenreData> {get set}
 }
 
 protocol MovieSearchType {
@@ -28,6 +30,8 @@ class MovieSearchVM: MovieSearchType, MovieSearchInput, MovieSearchOutPut {
   var output: MovieSearchOutPut {return self}
   
   var movieList: PublishSubject<[MovieData]> = PublishSubject<[MovieData]>()
+  var movieInfo: PublishSubject<MovieGenreData> = PublishSubject<MovieGenreData>()
+  
   private let disposeBag: DisposeBag = DisposeBag()
 }
 extension MovieSearchVM { //네이버 검색
@@ -36,6 +40,13 @@ extension MovieSearchVM { //네이버 검색
       .subscribe(onNext: { [weak self] (list) in
         //
         self?.movieList.onNext(list.items)
+      }).disposed(by: disposeBag)
+  }
+  
+  func movieDetailSearch(seq: String) {
+    MovieGenreNetwork.SI.movieDetailSearch(seq: seq)
+      .subscribe(onNext: { [weak self] (movie) in
+        self?.movieInfo.onNext(movie)
       }).disposed(by: disposeBag)
   }
 }
