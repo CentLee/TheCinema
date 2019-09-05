@@ -57,4 +57,25 @@ class MovieGenreNetwork {
       return Disposables.create()
     }
   }
+  
+  func movieDetailSearch(seq: String) -> Observable<MovieGenreData> {
+    return Observable<MovieGenreData>.create { observer in
+      guard let url: URL = URL(string: self.baseUrl + "&ServiceKey=\(self.serviceKey)&movieSeq=\(seq)") else
+      {
+        return Disposables.create()
+      }
+      iPrint(url)
+      Alamofire.request(url, method: .get).responseJSON(completionHandler: { (response) in
+        switch response.result {
+        case .success(_):
+          guard let json = response.result.value as? [String: Any] else { return }
+          guard let data = Mapper<MovieGenreList>().map(JSON: json) else { return }
+          observer.onNext(data.items[0].movies[0])
+          observer.onCompleted()
+        case .failure(let err): iPrint(err.localizedDescription)
+        }
+      })
+      return Disposables.create()
+    }
+  }
 }

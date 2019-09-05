@@ -45,8 +45,8 @@ extension UserProfileEditViewModel {
         MainManager.SI.userInfo.userProfileImage = imgUrl
       }
     } else {
-        self.ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name])
-        MainManager.SI.userInfo.userName = name
+      self.ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name])
+      MainManager.SI.userInfo.userName = name
     }
     //끝나고 나서.
     editCompleted.onNext(())

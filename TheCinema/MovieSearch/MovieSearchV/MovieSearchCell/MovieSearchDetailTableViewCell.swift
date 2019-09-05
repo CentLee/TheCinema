@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieSearchDetailTableViewCell: UITableViewCell { //영화 단일 검색 테이블 셀
+class MovieSearchDetailTableViewCell: UITableViewCell { //영화 단일 검색 테이블 셀 & 조회순 및 즐겨찾기 데이터도 포함.
   
   static let cellIdentifier: String = String(describing: MovieSearchDetailTableViewCell.self)
   
@@ -87,12 +87,21 @@ extension MovieSearchDetailTableViewCell {
     layoutIfNeeded()
   }
   
-  func config(info: MovieData) {
-    moviePoster.URLString(urlString: info.image)
-    movieTitle.text = info.full
-    rating.text = "평점: \(info.userRating)"
-    
-    MainManager.SI.ratingCalculate(rating: Int(Double(info.userRating)!), stackV: ratingStack)
+  func config<T>(info: T) {
+    if let info = info as? MovieData {
+      moviePoster.URLString(urlString: info.image)
+      movieTitle.text = info.full
+      rating.text = "평점: \(info.userRating)"
+      
+      MainManager.SI.ratingCalculate(rating: Int(Double(info.userRating)!), stackV: ratingStack)
+    }
+      
+    else if let info = info as? MovieFavoriteData {
+      moviePoster.URLString(urlString: info.posters)
+      movieTitle.text = info.title
+      rating.text = info.date
+      ratingStack.isHidden = true
+    }
   }
 }
 

@@ -14,7 +14,7 @@ class MovieDetailHeaderV: UIView { //헤더 섹션 뷰
   
   lazy var btn: UIButton = UIButton().then {
     $0.isHidden = true
-    $0.setTitle("전체보기", for: .normal)
+    $0.setImage(UIImage(named: "btn_compose")!, for: .normal)
   }
   
   override init(frame: CGRect) {
@@ -33,11 +33,16 @@ class MovieDetailHeaderV: UIView { //헤더 섹션 뷰
 }
 extension MovieDetailHeaderV {
   private func layoutSetUp() {
-    addSubview(title)
+    [title, btn].forEach { self.addSubview($0) }
     
     constrain(title) {
       $0.centerY == $0.superview!.centerY
       $0.left    == $0.superview!.left + 10
+    }
+    
+    constrain(btn) {
+      $0.centerY  == $0.superview!.centerY
+      $0.right    == $0.superview!.right - 20
     }
   }
 }

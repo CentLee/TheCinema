@@ -127,3 +127,19 @@ class MovieComment: Mappable {
     uid          <- map["user_id"]
   }
 }
+
+class MovieFavoriteData: Mappable {
+  var movieSeq: String = ""
+  var title: String = ""
+  var posters: String = ""
+  var date: String = ""
+  
+  required init?(map: Map) { }
+  
+  func mapping(map: Map) {
+    movieSeq      <- map["id"]
+    title        <- map["title"]
+    posters       <- map["posters"]
+    date         <- map["date"]
+  }
+}

@@ -200,6 +200,7 @@ extension MovieCommentVC {
   private func navigationSetUp() {
     navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelAction))
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(registrationAction))
+    navigationItem.rightBarButtonItem?.isEnabled = false
     setNeedsStatusBarAppearanceUpdate()
   }
 }

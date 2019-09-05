@@ -51,7 +51,7 @@ class BoxOfficeNetwork { // 박스 오피스 검색 및 그 영화에 대한 kmd
   
   func boxOfficeMovie(movieNm: String, date: String) -> Observable<MovieGenreData> {
     return Observable<MovieGenreData>.create { observer in
-      let str: String = self.kmdbUrl + "&query=\(movieNm)&listCount=1&detail=Y&releaseDts=\(date)"
+      let str: String = self.kmdbUrl + "&query=\(movieNm.replacingOccurrences(of: "!", with: ""))&listCount=1&detail=Y&releaseDts=\(date)"
       guard let encodingStr: String = str.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else
       {
         return Disposables.create()
@@ -64,6 +64,7 @@ class BoxOfficeNetwork { // 박스 오피스 검색 및 그 영화에 대한 kmd
         switch response.result {
         case .success(_):
           guard let json = response.result.value as? [String : Any] else { return }
+          
           guard let data: MovieGenreList = Mapper<MovieGenreList>().map(JSON: json) else { return }
           let movieData: MovieGenreData = data.items[0].movies[0]
           movieData.title = movieData.title.replacingOccurrences(of: " !HS ", with: "").replacingOccurrences(of: " !HE ", with: "")
