@@ -999,7 +999,7 @@
 					"\"nanopb\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LCH.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheCinema-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1084,7 +1084,7 @@
 					"\"nanopb\"",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheCinema;
+				PRODUCT_BUNDLE_IDENTIFIER = com.LCH.TheCinema;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheCinema-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
