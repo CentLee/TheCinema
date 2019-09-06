@@ -143,3 +143,15 @@ class MovieFavoriteData: Mappable {
     date         <- map["date"]
   }
 }
+
+class GenreTotalData: Mappable { //조회수 트래킹 데이터
+  var genreName: String = ""
+  var genreCount: Int = 0
+  
+  required init?(map: Map) { }
+  
+  func mapping(map: Map) {
+    genreName         <- map["genre_name"]
+    genreCount        <- map["genre_count"]
+  }
+}

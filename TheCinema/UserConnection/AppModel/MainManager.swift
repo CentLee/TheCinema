@@ -39,12 +39,15 @@ extension MainManager {
   }
   
   func userInfo(uid: String) {
-    ref.child("User").child("\(uid)").child("UserInformation").observeSingleEvent(of: .value) { (snapshot) in
-      guard !(snapshot.value is NSNull) else { return }
-      guard let item = snapshot.value as? [String:Any] , let data = Mapper<UserInformation>().map(JSON: item) else { return }
-      //let data = Mapper<UserInformation>().map(JSON: item)
-      MainManager.SI.userInfo = data
+    DispatchQueue.global().async {
+      self.ref.child("User").child("\(uid)").child("UserInformation").observeSingleEvent(of: .value) { (snapshot) in
+        guard !(snapshot.value is NSNull) else { return }
+        guard let item = snapshot.value as? [String:Any] , let data = Mapper<UserInformation>().map(JSON: item) else { return }
+        MainManager.SI.userInfo = data
+      }
+      self.ref.removeAllObservers()
     }
+    
   }
   
   func uploadProfileImage(uid: String, profileImage: Data? , onCompleted: @escaping ((String) -> Void)) {

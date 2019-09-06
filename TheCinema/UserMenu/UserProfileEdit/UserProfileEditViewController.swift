@@ -36,7 +36,7 @@ class UserProfileEditViewController: UIViewController {
   }
   
   private let disposeBag: DisposeBag = DisposeBag()
-  private let viewModel: UserProfileEditType = UserProfileEditViewModel()
+  private let viewModel: UserProfileEditViewModelType = UserProfileEditViewModel()
   
   override func viewDidLoad() {
     super.viewDidLoad()

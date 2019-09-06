@@ -13,7 +13,6 @@ enum UserMenuType: String {
   case inquiryTop = "조회수 탑 장르"
   case profileEdit = "프로필 편집"
   case logout = "로그아웃"
-  
   static var arrays: [UserMenuType] {
     return [.favorite, .inquiryTop, .profileEdit, .logout]
   }
@@ -80,7 +79,7 @@ class UserMenuTableViewDataSource: NSObject ,UITableViewDataSource {
 
 class UserMenuTableViewDelegate: NSObject, UITableViewDelegate {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    return MovieDetailHeaderV(text: "메뉴")
+    return MovieDetailHeaderView(text: "메뉴")
   }
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 30

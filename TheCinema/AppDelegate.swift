@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     FirebaseApp.configure()
     
     UserDefaults.standard.set(String(""), forKey: "currentDate")
-    let loginVC = LoginVC()
+    let loginVC = LoginViewController()
     window = UIWindow(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
     guard let window = window else { return false }
     window.rootViewController = loginVC

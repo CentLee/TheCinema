@@ -12,7 +12,7 @@ class MovieSearchDetailTableViewCell: UITableViewCell { //영화 단일 검색 �
   
   static let cellIdentifier: String = String(describing: MovieSearchDetailTableViewCell.self)
   
-  lazy var movieBackV: BackContentV = BackContentV().then {
+  lazy var movieBackV: BackContentView = BackContentView().then {
     $0.layer.masksToBounds = false
     $0.backgroundColor = MainManager.SI.tableColor
   }
@@ -104,8 +104,23 @@ extension MovieSearchDetailTableViewCell {
     else if let info = info as? MovieFavoriteData {
       moviePoster.URLString(urlString: info.posters)
       movieTitle.text = info.title
-      rating.text = info.date
+      rating.text = "개봉일 : \(info.date)"
       ratingStack.isHidden = true
+      animateCell()
+    }
+      
+    else if let info = info as? GenreTotalData {
+      moviePoster.image = MovieGenreType(rawValue: info.genreName)?.image
+      movieTitle.text = info.genreName
+      rating.text = "총 조회 수 : \(info.genreCount)"
+      ratingStack.isHidden = true
+      animateCell()
+    }
+  }
+  private func animateCell() {
+    alpha = 0
+    UIView.animate(withDuration: 0.5) {
+      self.alpha = 1
     }
   }
 }
