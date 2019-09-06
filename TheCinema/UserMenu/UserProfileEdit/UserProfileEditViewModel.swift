@@ -19,12 +19,12 @@ protocol UserProfileEditOutput {
   var editCompleted: PublishSubject<Void> {get set}
 }
 
-protocol UserProfileEditType {
+protocol UserProfileEditViewModelType {
   var input: UserProfileEditInput {get}
   var output: UserProfileEditOutput {get}
 }
 
-class UserProfileEditViewModel: UserProfileEditType, UserProfileEditInput, UserProfileEditOutput {
+class UserProfileEditViewModel: UserProfileEditViewModelType, UserProfileEditInput, UserProfileEditOutput {
   
   var input: UserProfileEditInput {return self}
   var output: UserProfileEditOutput {return self}
