@@ -47,6 +47,7 @@ class MovieCommentViewModel: MovieCommentViewModelType, MovieCommentInput, Movie
 
 extension MovieCommentViewModel {
   func commentList(seq: String, recent: Bool = false) {
+    movieSeq.accept(seq)
     var list: [MovieComment] = []
     let path = recent ? ref.child("Comments").child("\(seq)").queryLimited(toFirst: 10) : ref.child("Comments").child("\(seq)")
     DispatchQueue.global().async {
@@ -69,6 +70,7 @@ extension MovieCommentViewModel {
   }
   
   func registerComment(data: MovieComment) { //코멘트 등록.다 되면 스트림 넘긴다.
+    iPrint(movieSeq.value)
     ref.child("Comments").child("\(movieSeq.value)").childByAutoId().setValue(["name": data.name, "created_at": data.createdAt, "image": data.image, "comment": data.comment, "rating": data.rating, "comment_key": data.commentKey, "user_id": data.uid]) { (error, _) in
       guard error == nil else {
         self.onCompleted.onNext(false)

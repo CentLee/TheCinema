@@ -92,9 +92,9 @@ extension MovieCommentTableViewCell {
   
   func config(data: MovieComment) {
     selectionStyle = .none
-    OperationQueue.main.addOperation {
+    //OperationQueue.main.addOperation {
       self.profile.URLString(urlString: data.image)
-    }
+    //}
     nameText.text = data.name
     dateText.text = data.createdAt
     commentText.text = data.comment
