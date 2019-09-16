@@ -15,11 +15,13 @@ protocol MovieCommentInput { //레이팅이랑 코멘트 받을 것.
   func commentList(seq: String, recent: Bool)
   func favorite(info: MovieGenreData)
   func myFavorite(seq: String)
+  func reportComment(data: MovieComment)
 }
 
 protocol MovieCommentOutPut {
   var comments: PublishSubject<[MovieComment]> {get set} //파싱해서 가져갈 코멘트 데이터
   var onCompleted: PublishSubject<Bool> {get set}
+  var onReportCompleted: PublishSubject<Bool> {get set}
   var favoriteMovie: PublishSubject<Bool> {get set}
   var favoriteEnabled: PublishSubject<Bool> {get set}
 }
@@ -39,10 +41,16 @@ class MovieCommentViewModel: MovieCommentViewModelType, MovieCommentInput, Movie
   var favoriteEnabled: PublishSubject<Bool> = PublishSubject<Bool>()
   
   var onCompleted: PublishSubject<Bool> = PublishSubject<Bool>()
-  
+  var onReportCompleted: PublishSubject<Bool> = PublishSubject<Bool>()
+  var commentData: MovieComment = MovieComment(JSON: [:])!
   private let disposeBag: DisposeBag = DisposeBag()
   private let ref: DatabaseReference = Database.database().reference()
   init() { }
+  
+  convenience init(data: MovieComment) {
+    self.init()
+    self.commentData = data
+  }
 }
 
 extension MovieCommentViewModel {
@@ -70,13 +78,28 @@ extension MovieCommentViewModel {
   }
   
   func registerComment(data: MovieComment) { //코멘트 등록.다 되면 스트림 넘긴다.
-    iPrint(movieSeq.value)
-    ref.child("Comments").child("\(movieSeq.value)").childByAutoId().setValue(["name": data.name, "created_at": data.createdAt, "image": data.image, "comment": data.comment, "rating": data.rating, "comment_key": data.commentKey, "user_id": data.uid]) { (error, _) in
+    guard let key: String = ref.child("Comments").child("\(movieSeq.value)").childByAutoId().key else { return }
+    ref.child("Comments").child("\(movieSeq.value)").updateChildValues([key : ["name": data.name, "created_at": data.createdAt, "image": data.image, "comment": data.comment, "rating": data.rating, "comment_key": key, "user_id": data.uid, "report_count": 0]]) { (error, _) in
       guard error == nil else {
         self.onCompleted.onNext(false)
         return
       }
       self.onCompleted.onNext(true)
+    }
+  }
+  
+  func reportComment(data: MovieComment) { //신고 이건 CommentVC
+    iPrint(movieSeq.value)
+    if data.reportCount == 9 { //9 -> 10
+      ref.child("Comments").child("\(movieSeq.value)").child(data.commentKey).removeValue()
+      onReportCompleted.onNext(true)
+    } else {
+      
+      ref.child("Comments").child("\(movieSeq.value)").child(data.commentKey).updateChildValues(["report_count": (data.reportCount + 1)]) { [weak self] (error, _) in
+        guard let self = self else { return }
+        guard error == nil else { return }
+        self.onReportCompleted.onNext(true)
+      }
     }
   }
   

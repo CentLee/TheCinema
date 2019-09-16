@@ -75,9 +75,17 @@ extension MovieCommentViewController {
         self?.clearContext()
       }).disposed(by: disposeBag)
     
+    viewModel.outputs.onReportCompleted.asDriver(onErrorJustReturn: false).filter{$0}
+      .drive(onNext: { [weak self] _ in
+        self?.dismiss(animated: true, completion: nil)
+      }).disposed(by: disposeBag)
+    
     commentList.asDriver(onErrorJustReturn: [])
       .drive(commentTable.rx.items(cellIdentifier: MovieCommentTableViewCell.cellIdentifier, cellType: MovieCommentTableViewCell.self)) { (row, list, cell) in
-        cell.config(data: list)
+        cell.commentViewModel = self.viewModel
+        cell.commentViewModel.inputs.movieSeq.accept(self.movieId)
+        cell.vc = self
+        cell.config(data: list, recent: false)
       }.disposed(by: disposeBag)
   }
   
