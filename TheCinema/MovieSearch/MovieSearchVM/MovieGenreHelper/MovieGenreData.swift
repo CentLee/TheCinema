@@ -115,6 +115,7 @@ class MovieComment: Mappable {
   var createdAt: String = ""
   var commentKey: String = ""
   var uid: String = ""
+  var reportCount: Int = 0
   required init?(map: Map) { }
   
   func mapping(map: Map) {
@@ -125,6 +126,7 @@ class MovieComment: Mappable {
     createdAt    <- map["created_at"]
     commentKey   <- map["comment_key"]
     uid          <- map["user_id"]
+    reportCount  <- map["report_count"]
   }
 }
 

@@ -38,6 +38,16 @@ class MovieCommentTableViewCell: UITableViewCell { //영화 리뷰 셀
     $0.font = UIFont(name: "NanumSquareOTFR", size: 15)
   }
   
+  lazy var moreBtn: UIButton = UIButton().then {
+    $0.isHidden = true
+    $0.setImage(UIImage(named: "more"), for: .normal)
+  }
+  
+  private let disposeBag: DisposeBag = DisposeBag()
+  var commentViewModel: MovieCommentViewModelType = MovieCommentViewModel()
+  var commentData: MovieComment = MovieComment(JSON: [:])!
+  var vc: UIViewController = UIViewController()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     layoutSetUp()
@@ -49,12 +59,19 @@ class MovieCommentTableViewCell: UITableViewCell { //영화 리뷰 셀
 
 extension MovieCommentTableViewCell {
   private func layoutSetUp() {
-    [profile, nameText, ratingStack, dateText, commentText].forEach { self.contentView.addSubview($0) }
+    [profile, moreBtn, nameText, ratingStack, dateText, commentText].forEach { self.contentView.addSubview($0) }
     
     constrain(profile) {
       $0.top    == $0.superview!.top + 20
       $0.left   == $0.superview!.left + 20
       $0.width  == 50
+      $0.height == $0.width
+    }
+    
+    constrain(moreBtn, profile) {
+      $0.top    == $1.top
+      $0.right  == $0.superview!.right - 10
+      $0.width  == 24
       $0.height == $0.width
     }
     
@@ -88,9 +105,14 @@ extension MovieCommentTableViewCell {
       ratingStack.addArrangedSubview(image)
     }
     contentView.backgroundColor = MainManager.SI.bgColor
+    
+    moreBtn.rx.tap.asDriver()
+      .drive(onNext: { [weak self] in
+        self?.report()
+      }).disposed(by: disposeBag)
   }
   
-  func config(data: MovieComment) {
+  func config(data: MovieComment, recent: Bool = true) {
     selectionStyle = .none
     //OperationQueue.main.addOperation {
       self.profile.URLString(urlString: data.image)
@@ -99,6 +121,12 @@ extension MovieCommentTableViewCell {
     dateText.text = data.createdAt
     commentText.text = data.comment
     ratingCalculate(rating: data.rating)
+    
+    if !recent {
+      moreBtn.isHidden = data.uid == MainManager.SI.userInfo.userId
+    }
+    
+    commentData = data
   }
   
   private func ratingCalculate(rating: Int) {
@@ -118,5 +146,19 @@ extension MovieCommentTableViewCell {
         image.image = UIImage(named: "ic_star_large")
       }
     }
+  }
+  
+  private func report() {
+    let alert: UIAlertController = UIAlertController(title: "더보기", message: nil, preferredStyle: .actionSheet)
+    
+    let cancelAction: UIAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+    let reportAction: UIAlertAction = UIAlertAction(title: "신고", style: .default) { (action) in
+      self.commentViewModel.inputs.reportComment(data: self.commentData)
+    }
+    
+    alert.addAction(cancelAction)
+    alert.addAction(reportAction)
+    
+    vc.present(alert, animated: true, completion: nil)
   }
 }
