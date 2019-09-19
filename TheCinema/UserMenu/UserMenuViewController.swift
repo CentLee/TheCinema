@@ -59,7 +59,7 @@ class UserMenuViewController: UIViewController { //유저 탭 즐겨 찾기 & �
   }
   
   override func viewDidAppear(_ animated: Bool) {
-    iPrint(MainManager.SI.userInfo.userName)
+    iPrint(MainManager.SI.userInfo.userProfileImage)
     userMenuView.userProfile.URLString(urlString: MainManager.SI.userInfo.userProfileImage)
     userMenuView.userName.text = MainManager.SI.userInfo.userName
   }
