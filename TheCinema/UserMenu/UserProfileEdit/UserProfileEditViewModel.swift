@@ -39,17 +39,18 @@ class UserProfileEditViewModel: UserProfileEditViewModelType, UserProfileEditInp
 extension UserProfileEditViewModel {
   func profileEdited(name: String) {
     if let image = profileImage.value {
-      MainManager.SI.uploadProfileImage(uid: MainManager.SI.userInfo.userId, profileImage: image) { (imgUrl) in
-        self.ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name, "user_profile_img": imgUrl])
+      MainManager.SI.uploadProfileImage(uid: MainManager.SI.userInfo.userId, profileImage: image) { [weak self] (imgUrl) in
+        self?.ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name, "user_profile_img": imgUrl])
         MainManager.SI.userInfo.userName = name
         MainManager.SI.userInfo.userProfileImage = imgUrl
+        iPrint(MainManager.SI.userInfo.userProfileImage)
+        self?.editCompleted.onNext(())
       }
     } else {
-      self.ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name])
+      ref.child("User").child(MainManager.SI.userInfo.userId).child("UserInformation").updateChildValues(["user_name": name])
       MainManager.SI.userInfo.userName = name
+      editCompleted.onNext(())
     }
-    //끝나고 나서.
-    editCompleted.onNext(())
   }
   
   func userExistence(name: String) { //닉네임 중복검사 플로우
