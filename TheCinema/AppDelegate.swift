@@ -13,7 +13,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate  {
   
   var window: UIWindow?
-  
+  //21.04.24 Current Version Check And Building 
   // var appServices: AppServices
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
