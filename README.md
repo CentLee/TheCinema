@@ -10,4 +10,5 @@ MVVM 구조 사용
 
 라이브러리는 PodFile에 있는 것들만 사용했습니다.
 
-공백기를 가진 후 다시 작업 예정
+
+~ 21.08.10 현재 Version Upgrade , Refactoring Working
